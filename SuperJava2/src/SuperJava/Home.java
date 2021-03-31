@@ -1,14 +1,12 @@
-//PPE 3: Supercar Java Version 1.0
+//PPE 3: Supercar Java Version 2.0
 //Created By: Aakash Chady
-//Date:22/03/2021
+//Date Created:22/03/2021
+//Date Modified (Version 2.0): 31/03/2021
 
 
 
 package SuperJava;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.Date;
-import java.sql.DriverManager;
+import java.sql.*;
 import java.awt.EventQueue;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
@@ -17,9 +15,15 @@ import javax.swing.JOptionPane;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
+
 
 
 
@@ -33,6 +37,8 @@ public class Home {
 	private JTextField textFieldNomEmp;
 	private JTextField textFieldModele;
 	private JTextField textFieldStatus;
+	private JTable table;
+	private JScrollPane scrollPane;
 
 	/**
 	 * Launch the application.
@@ -62,7 +68,13 @@ public class Home {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.addWindowListener (new WindowAdapter () {
+			@Override
+			public void windowOpened (WindowEvent arg0) {
+				ShowData();
+			}
+		});
+		frame.setBounds(100, 100, 900, 700);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -102,38 +114,38 @@ public class Home {
 		frame.getContentPane().add(lblStatut);
 		
 		textFieldID = new JTextField();
-		textFieldID.setBounds(120, 38, 183, 20);
+		textFieldID.setBounds(120, 38, 465, 20);
 		frame.getContentPane().add(textFieldID);
 		textFieldID.setColumns(10);
 		
 		textFieldDate = new JTextField();
 		textFieldDate.setColumns(10);
-		textFieldDate.setBounds(120, 63, 183, 20);
+		textFieldDate.setBounds(120, 63, 465, 20);
 		frame.getContentPane().add(textFieldDate);
 		
 		textFieldPrix = new JTextField();
 		textFieldPrix.setColumns(10);
-		textFieldPrix.setBounds(120, 88, 183, 20);
+		textFieldPrix.setBounds(120, 88, 465, 20);
 		frame.getContentPane().add(textFieldPrix);
 		
 		textFieldNomClient = new JTextField();
 		textFieldNomClient.setColumns(10);
-		textFieldNomClient.setBounds(120, 113, 183, 20);
+		textFieldNomClient.setBounds(120, 113, 465, 20);
 		frame.getContentPane().add(textFieldNomClient);
 		
 		textFieldNomEmp = new JTextField();
 		textFieldNomEmp.setColumns(10);
-		textFieldNomEmp.setBounds(120, 138, 183, 20);
+		textFieldNomEmp.setBounds(120, 138, 465, 20);
 		frame.getContentPane().add(textFieldNomEmp);
 		
 		textFieldModele = new JTextField();
 		textFieldModele.setColumns(10);
-		textFieldModele.setBounds(120, 163, 183, 20);
+		textFieldModele.setBounds(120, 163, 465, 20);
 		frame.getContentPane().add(textFieldModele);
 		
 		textFieldStatus = new JTextField();
 		textFieldStatus.setColumns(10);
-		textFieldStatus.setBounds(120, 188, 183, 20);
+		textFieldStatus.setBounds(120, 188, 465, 20);
 		frame.getContentPane().add(textFieldStatus);
 		
 		JButton btnSave = new JButton("Save");
@@ -142,9 +154,18 @@ public class Home {
 				SaveToDB();
 			}
 		});
-		btnSave.setBounds(155, 219, 89, 23);
+		btnSave.setBounds(314, 216, 89, 23);
 		frame.getContentPane().add(btnSave);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(10,253, 860, 200);
+		frame.getContentPane().add(scrollPane);
+		table = new JTable();
+		
+	scrollPane.setViewportView(table);
+		
 	}
+	
 	
 	static Connection Conn() {
 		try {
@@ -152,7 +173,7 @@ public class Home {
 			String url = "jdbc:mysql://localhost/superjava";
 			Class.forName (Driver);
 			return DriverManager.getConnection(url, "akash", "2HelVn6HDMAyPBRR");
-		} catch(Exception e) {
+			} catch(Exception e) {
 			System.err.println("Connection Failed!!");
 		}
 	return null;	
@@ -180,6 +201,37 @@ public class Home {
 		JOptionPane.showMessageDialog(null, "Saved!!");
 	}catch (Exception e) {
 		System.err.println("Error!!" + e);
+	}
+		}
+	
+	private void ShowData () {
+		Connection Connect = Conn();
+		DefaultTableModel model = new DefaultTableModel();
+		Object[] column = {"ID","Date De Vente","Prix De Vente (TTC)","Nom Du Client", "Nom De L'employe", "Modele", "Statut"};
+      	model.setColumnIdentifiers(column);
+	try {	
+		String showQuery ="SELECT * FROM `ventes`";
+		PreparedStatement s = Connect.prepareStatement(showQuery);
+		ResultSet r = s.executeQuery();
+		while (r.next()) {
+			model.addRow(new Object[] {
+			     r.getString("IDVente"),
+	            r.getString("DateVente"),
+	            r.getString("PrixVente"),
+	            r.getString("NomClient"),
+	             r.getString("NomEmp"),
+	            r.getString("Modele"),
+	            r.getString("Status"),
+			} );
+	            
+	    	table.setModel(model);
+	              
+	              
+		}
+		
+	table.setBounds(81,250, 561, 400);	
+	} catch (Exception e) {
+		System.err.println(e);
 	}
 		}
 	}

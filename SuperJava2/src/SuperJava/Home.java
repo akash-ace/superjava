@@ -1,7 +1,7 @@
-//PPE 3: Supercar Java Version 2.0
+//PPE 3: Supercar Java Version 3.0
 //Created By: Aakash Chady
 //Date Created:22/03/2021
-//Date Modified (Version 2.0): 31/03/2021
+//Date Modified (Version 3.0): 26/04/2021
 
 
 
@@ -23,6 +23,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 
 
@@ -39,6 +41,7 @@ public class Home {
 	private JTextField textFieldStatus;
 	private JTable table;
 	private JScrollPane scrollPane;
+
 
 	/**
 	 * Launch the application.
@@ -154,15 +157,46 @@ public class Home {
 				SaveToDB();
 			}
 		});
-		btnSave.setBounds(314, 216, 89, 23);
+		btnSave.setBounds(130, 219, 89, 23);
 		frame.getContentPane().add(btnSave);
 		
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(10,253, 860, 200);
 		frame.getContentPane().add(scrollPane);
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String ID = table.getValueAt(table.getSelectedRow(),0).toString();
+				selectData(ID);
+			}
+		});
 		
 	scrollPane.setViewportView(table);
+	
+	JButton buttonUpdate = new JButton("Update");
+	buttonUpdate.addActionListener(new ActionListener() {
+		
+		public void actionPerformed(ActionEvent e) {
+			if (table.getSelectedRow()>= 0) {
+			updateData(textFieldID.getText());
+			}
+		}
+	});
+	buttonUpdate.setBounds(285, 219, 89, 23);
+	frame.getContentPane().add(buttonUpdate);
+	
+	JButton buttonDelete = new JButton("Delete");
+	buttonDelete.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			if (table.getSelectedRow()>= 0) {
+				deleteData(textFieldID.getText());
+				}
+			
+		}
+	});
+	buttonDelete.setBounds(467, 219, 89, 23);
+	frame.getContentPane().add(buttonDelete);
 		
 	}
 	
@@ -199,6 +233,8 @@ public class Home {
 		in.setString(7, textFieldStatus.getText());
 		in.execute();
 		JOptionPane.showMessageDialog(null, "Saved!!");
+		ShowData();
+
 	}catch (Exception e) {
 		System.err.println("Error!!" + e);
 	}
@@ -233,6 +269,75 @@ public class Home {
 	} catch (Exception e) {
 		System.err.println(e);
 	}
-		}
+	}	
+	private void selectData(String ID) {
+		Connection Con = Conn();
+		try {
+			String SelectQuery = "SELECT * FROM ventes WHERE IDVente = ?";
+			PreparedStatement ps = Con.prepareStatement(SelectQuery);
+			ps.setString(1,ID);
+			ResultSet r = ps.executeQuery();
+			
+			while (r.next()) {
+				textFieldID.setText(r.getString("IDVente"));
+				textFieldDate.setText(r.getString("DateVente"));
+				textFieldPrix.setText(r.getString("PrixVente"));
+				textFieldNomClient.setText(r.getString("NomClient"));
+				textFieldNomEmp.setText(r.getString("NomEmp"));
+				textFieldModele.setText(r.getString("Modele"));
+				textFieldStatus.setText(r.getString("Status"));
+		           
+			} 
+			
+		} catch (Exception e) {
+			System.err.println(e);
+			
+		}  
+	}	
+		private void updateData(String ID) {
+			Connection Con = Conn();
+			
+			try {
+				String UpdateQuery = "UPDATE ventes SET DateVente = ?, PrixVente = ?, NomClient = ?, NomEmp = ?, Modele = ?, Status = ? WHERE IDVente = ?";
+				PreparedStatement ps = Con.prepareStatement(UpdateQuery);
+	
+				ps.setString(1, textFieldDate.getText());
+				ps.setString(2, textFieldPrix.getText());
+				ps.setString(3, textFieldNomClient.getText());
+				ps.setString(4, textFieldNomEmp.getText());
+				ps.setString(5, textFieldModele.getText());
+				ps.setString(6, textFieldStatus.getText());
+				ps.setString(7, ID);
+				ps.execute();
+				
+				JOptionPane.showMessageDialog(null, "Data Updated");
+				ShowData();
+				
+			} catch (Exception e) {
+				System.err.println(e);
+				
+			}  	
+	
 	}
+		
+	  private void deleteData (String ID) {
+		  Connection Con = Conn();
+		  try {
+				String DeleteQuery = "DELETE FROM ventes WHERE IDVente = ?";
+				PreparedStatement ps = Con.prepareStatement(DeleteQuery);
+	
+				ps.setString(1, ID);
+				ps.execute();
+				
+				JOptionPane.showMessageDialog(null, "Deleted");
+				ShowData();
+				
+			} catch (Exception e) {
+				System.err.println(e);
+				
+			}  	
+		  
+	  }
+	}
+
 

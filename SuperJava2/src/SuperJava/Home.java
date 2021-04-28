@@ -1,7 +1,7 @@
-//PPE 3: Supercar Java Version 3.0
+//PPE 3: Supercar Java Version 4.0
 //Created By: Aakash Chady
 //Date Created:22/03/2021
-//Date Modified (Version 3.0): 26/04/2021
+//Date Modified (Version 4.0): 28/04/2021
 
 
 
@@ -25,6 +25,10 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 
 
@@ -41,7 +45,10 @@ public class Home {
 	private JTextField textFieldStatus;
 	private JTable table;
 	private JScrollPane scrollPane;
-
+	JComboBox comboBox;
+	JComboBox comboBox_1 = new JComboBox();
+	int filterIndex;
+	
 
 	/**
 	 * Launch the application.
@@ -164,6 +171,12 @@ public class Home {
 		scrollPane.setBounds(10,253, 860, 200);
 		frame.getContentPane().add(scrollPane);
 		table = new JTable();
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+			}
+		));
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -197,6 +210,25 @@ public class Home {
 	});
 	buttonDelete.setBounds(467, 219, 89, 23);
 	frame.getContentPane().add(buttonDelete);
+	
+	JLabel lblFilter = new JLabel("FILTER BY");
+	lblFilter.setFont(new Font("Tahoma", Font.BOLD, 14));
+	lblFilter.setBounds(741, 41, 111, 14);
+	frame.getContentPane().add(lblFilter);
+	
+
+	comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"None", "Day", "Week", "Month"}));
+	comboBox_1.setSelectedIndex(0);
+	comboBox_1.setMaximumRowCount(4);
+	ActionListener actionListener = new ActionListener() {
+	      public void actionPerformed(ActionEvent actionEvent) {
+	        ShowData();
+	      }
+	    };
+	    comboBox_1.addActionListener(actionListener);
+	comboBox_1.setBounds(741, 62, 82, 22);
+	frame.getContentPane().add(comboBox_1);
+ 
 		
 	}
 	
@@ -240,14 +272,24 @@ public class Home {
 	}
 		}
 	
+    private void ChangeIndex() {
+    	
+    }
 	private void ShowData () {
 		Connection Connect = Conn();
 		DefaultTableModel model = new DefaultTableModel();
 		Object[] column = {"ID","Date De Vente","Prix De Vente (TTC)","Nom Du Client", "Nom De L'employe", "Modele", "Statut"};
       	model.setColumnIdentifiers(column);
+    	String[] showQuery = new String[4];
+        showQuery[0] = "SELECT * FROM `ventes`;";
+        showQuery[1] = "SELECT * FROM `ventes` WHERE DateVente = CURDATE();";
+        showQuery[2] = "SELECT * FROM `ventes` WHERE YEARWEEK(DateVente) = YEARWEEK(CURDATE());";
+        showQuery[3]= "SELECT * FROM `ventes` WHERE MONTH(DateVente) = MONTH(CURDATE()) AND YEAR(DateVente) = YEAR(CURDATE());";
+       
+      	
 	try {	
-		String showQuery ="SELECT * FROM `ventes`";
-		PreparedStatement s = Connect.prepareStatement(showQuery);
+		
+		PreparedStatement s = Connect.prepareStatement(showQuery[comboBox_1.getSelectedIndex()]);
 		ResultSet r = s.executeQuery();
 		while (r.next()) {
 			model.addRow(new Object[] {

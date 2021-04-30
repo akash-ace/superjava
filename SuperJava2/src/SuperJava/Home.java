@@ -1,7 +1,7 @@
-//PPE 3: Supercar Java Version 4.0
+//PPE 3: Supercar Java Version 4.5
 //Created By: Aakash Chady
 //Date Created:22/03/2021
-//Date Modified (Version 4.0): 28/04/2021
+//Date Modified (Version 4.5): 30/04/2021
 
 
 
@@ -171,12 +171,7 @@ public class Home {
 		scrollPane.setBounds(10,253, 860, 200);
 		frame.getContentPane().add(scrollPane);
 		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-			}
-		));
+		
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -272,9 +267,7 @@ public class Home {
 	}
 		}
 	
-    private void ChangeIndex() {
-    	
-    }
+ 
 	private void ShowData () {
 		Connection Connect = Conn();
 		DefaultTableModel model = new DefaultTableModel();
@@ -288,7 +281,8 @@ public class Home {
        
       	
 	try {	
-		
+		model.setRowCount(0);
+		model.fireTableDataChanged();   
 		PreparedStatement s = Connect.prepareStatement(showQuery[comboBox_1.getSelectedIndex()]);
 		ResultSet r = s.executeQuery();
 		while (r.next()) {
@@ -301,7 +295,7 @@ public class Home {
 	            r.getString("Modele"),
 	            r.getString("Status"),
 			} );
-	            
+			
 	    	table.setModel(model);
 	              
 	              
@@ -353,6 +347,7 @@ public class Home {
 				ps.execute();
 				
 				JOptionPane.showMessageDialog(null, "Data Updated");
+				
 				ShowData();
 				
 			} catch (Exception e) {

@@ -1,7 +1,7 @@
-//PPE 3: Supercar Java Version 5.75
+//PPE 3: Supercar Java Version 6.0
 //Created By: Aakash Chady
 //Date Created:22/03/2021
-//Date Modified (Version 5.75): 03/05/2021
+//Date Modified (Version 6.0): 03/05/2021
 
 
 
@@ -29,6 +29,8 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 
 
@@ -80,6 +82,9 @@ public class Home {
 		Ventes = new JFrame();
 		Ventes.addWindowListener (new WindowAdapter () {
 			@Override
+			/**
+			 * Appel de la methode ShowData
+			 */
 			public void windowOpened (WindowEvent arg0) {
 				ShowData();
 			}
@@ -124,6 +129,21 @@ public class Home {
 		Ventes.getContentPane().add(lblStatut);
 		
 		textFieldID = new JTextField();
+		textFieldID.addKeyListener(new KeyAdapter() {
+			@Override
+			/**
+			 * Methode pour assurer que seulement les chiffres peuvent etre entrees
+			 */
+			public void keyPressed(KeyEvent e) {
+				char c = e.getKeyChar();		
+				if (Character.isDigit(c) || Character.isISOControl(c)) {
+					textFieldID.setEditable(true);
+				} else {
+					textFieldID.setEditable(false);
+				}
+	   	
+			}
+		});
 		textFieldID.setBounds(120, 38, 465, 20);
 		Ventes.getContentPane().add(textFieldID);
 		textFieldID.setColumns(10);
@@ -134,16 +154,61 @@ public class Home {
 		Ventes.getContentPane().add(textFieldDate);
 		
 		textFieldPrix = new JTextField();
+		textFieldPrix.addKeyListener(new KeyAdapter() {
+			@Override
+			/**
+			 * Methode pour assurer que seulement les chiffres peuvent etre entrees
+			 */
+			public void keyPressed(KeyEvent e) {
+				char c = e.getKeyChar();		
+				if (Character.isDigit(c) || Character.isISOControl(c)) {
+					textFieldPrix.setEditable(true);
+				} else {
+					textFieldPrix.setEditable(false);
+				}
+	   	
+			}
+		});
 		textFieldPrix.setColumns(10);
 		textFieldPrix.setBounds(120, 88, 465, 20);
 		Ventes.getContentPane().add(textFieldPrix);
 		
 		textFieldNomClient = new JTextField();
+		textFieldNomClient.addKeyListener(new KeyAdapter() {
+			@Override
+			/**
+			 * Methode pour assurer que seulement les lettres peuvent etre entrees
+			 */
+			public void keyPressed(KeyEvent e) {
+				char c = e.getKeyChar();		
+				if (Character.isLetter(c) || Character.isWhitespace(c) || Character.isISOControl(c)) {
+					textFieldNomClient.setEditable(true);
+				} else {
+					textFieldNomClient.setEditable(false);
+				}
+	   	
+			}
+		});
 		textFieldNomClient.setColumns(10);
 		textFieldNomClient.setBounds(120, 113, 465, 20);
 		Ventes.getContentPane().add(textFieldNomClient);
 		
 		textFieldNomEmp = new JTextField();
+		textFieldNomEmp.addKeyListener(new KeyAdapter() {
+			@Override
+			/**
+			 * Methode pour assurer que seulement les lettres peuvent etre entrees
+			 */
+			public void keyPressed(KeyEvent e) {
+				char c = e.getKeyChar();		
+				if (Character.isLetter(c) || Character.isWhitespace(c) || Character.isISOControl(c)) {
+					textFieldNomEmp.setEditable(true);
+				} else {
+					textFieldNomEmp.setEditable(false);
+				}
+	   	
+			}
+		});
 		textFieldNomEmp.setColumns(10);
 		textFieldNomEmp.setBounds(120, 138, 465, 20);
 		Ventes.getContentPane().add(textFieldNomEmp);
@@ -160,6 +225,9 @@ public class Home {
 		
 		JButton btnSave = new JButton("Save");
 		btnSave.addActionListener(new ActionListener() {
+			/**
+			 * Appel de la methode SaveToDB
+			 */
 			public void actionPerformed(ActionEvent e) {
 				SaveToDB();
 			}
@@ -175,6 +243,10 @@ public class Home {
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				/**
+				 * Appel de la methode selectData avec come parametre la variable ID
+				 * @param ID Identifiant de l'entree selectionee
+				 */
 				String ID = table.getValueAt(table.getSelectedRow(),0).toString();
 				selectData(ID);
 			}
@@ -184,7 +256,9 @@ public class Home {
 	
 	JButton buttonUpdate = new JButton("Update");
 	buttonUpdate.addActionListener(new ActionListener() {
-		
+		/**
+		 * Appel de la methode updateData
+		 */
 		public void actionPerformed(ActionEvent e) {
 			if (table.getSelectedRow()>= 0) {
 			updateData(textFieldID.getText());
@@ -196,6 +270,9 @@ public class Home {
 	
 	JButton buttonDelete = new JButton("Delete");
 	buttonDelete.addActionListener(new ActionListener() {
+		/**
+		 * Appel de la methode deleteData
+		 */
 		public void actionPerformed(ActionEvent e) {
 			if (table.getSelectedRow()>= 0) {
 				deleteData(textFieldID.getText());
@@ -216,6 +293,9 @@ public class Home {
 	comboBox_1.setSelectedIndex(0);
 	comboBox_1.setMaximumRowCount(4);
 	ActionListener actionListener = new ActionListener() {
+		/**
+		 * Appel de la methode ShowData selon les criteres de triage 
+		 */
 	      public void actionPerformed(ActionEvent actionEvent) {
 	        ShowData();
 	      }
@@ -226,6 +306,9 @@ public class Home {
 	
 	JButton btnExit = new JButton("Exit");
 	btnExit.addActionListener(new ActionListener() {
+		/**
+		 * Methode de sortie du module (Retour a la page acceuil)
+		 */
 		public void actionPerformed(ActionEvent e) {
 		    Ventes.setVisible(false);
             Acceuil BackAcceuil = new Acceuil();
@@ -238,7 +321,12 @@ public class Home {
 		
 	}
 	
-	
+	/**
+	 * Connexion entre l'application et la base de donnee MySQL
+	 * @param Driver Connexion au JDBC Driver
+	 *  @param url Lien a la base de donnees
+	 *  @return Connexion reussie
+	 */
 	static Connection Conn() {
 		try {
 			String Driver = "com.mysql.jdbc.Driver";
@@ -252,7 +340,13 @@ public class Home {
 	}
 	
 	
-	
+	/**
+	 * Methode pour sauvegarder les entrees dans la base de donnees
+	 * @param text la date entree dans le formlaire
+	 * @param date La date de vente
+	 * @param Connect Connexion a la base de donnees
+	 * @param query La requete MySQL afin de sauvegarder les donnees
+	 */
 	private void SaveToDB () {
 		String text = textFieldDate.getText();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -280,7 +374,11 @@ public class Home {
 	}
 		}
 	
- 
+	/**
+	 * Methode pour extraire les donnees de la base de donnees et ensuite les mettre dans une table
+	 * @param Connect Connexion a la base de donnees
+	 * @param showQuery La requete MySQL afin d'extraire les donnees. Ceci est un tableau de chaine de caracteres afin de stocker plusieurs requetes MySQL
+	 */
 	private void ShowData () {
 		Connection Connect = Conn();
 		DefaultTableModel model = new DefaultTableModel();
@@ -319,6 +417,12 @@ public class Home {
 		System.err.println(e);
 	}
 	}	
+	
+	/**
+	 * Methode pour enyoyer les donnees dans une ligne de la table sur le formulaire
+	 * @param Connect Connexion a la base de donnees
+	 * @param showQuery La requete MySQL afin de selectionner les donnees
+	 */
 	private void selectData(String ID) {
 		Connection Con = Conn();
 		try {
@@ -343,6 +447,11 @@ public class Home {
 			
 		}  
 	}	
+	/**
+	 * Methode pour la mise a jour de donnees
+	 * @param Con Connexion a la base de donnees
+	 * @param updateQuery La requete MySQL pour la mise a jour
+	 */
 		private void updateData(String ID) {
 			Connection Con = Conn();
 			
@@ -369,7 +478,11 @@ public class Home {
 			}  	
 	
 	}
-		
+		/**
+		 * Methode pour la suppression des donnees
+		 * @param Con Connexion a la base de donnees
+		 * @param updateQuery La requete MySQL pour la suppression
+		 */
 	  private void deleteData (String ID) {
 		  Connection Con = Conn();
 		  try {
@@ -389,6 +502,11 @@ public class Home {
 		  
 	  }
 	  
+
+		/**
+		 *  Methode getter de ce module
+		 *  
+		 */
 	  public void getVente() {
 		 Ventes.setVisible(true);
 	  }

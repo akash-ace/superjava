@@ -1,7 +1,7 @@
-//PPE 3: Supercar Java Version 5.75
+//PPE 3: Supercar Java Version 6.0
 //Created By: Aakash Chady
 //Date Created:22/03/2021
-//Date Modified (Version 5.75): 03/05/2021
+//Date Modified (Version 6.0): 03/05/2021
 package SuperJava;
 
 import java.awt.EventQueue;
@@ -13,6 +13,8 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
@@ -75,6 +77,9 @@ public class Commande {
 		RapportCommande = new JFrame();
 		RapportCommande.addWindowListener (new WindowAdapter () {
 			@Override
+			/**
+			 * Appel de la methode ShowData
+			 */
 			public void windowOpened (WindowEvent arg0) {
 				ShowData();
 			}
@@ -93,6 +98,9 @@ public class Commande {
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"None", "Day", "Week", "Month"}));
 		comboBox.setSelectedIndex(0);
 		ActionListener actionListener = new ActionListener() {
+			/**
+			 * Appel de la methode ShowData selon les criteres de triage 
+			 */
 		      public void actionPerformed(ActionEvent actionEvent) {
 		        ShowData();
 		      }
@@ -127,6 +135,21 @@ public class Commande {
 		RapportCommande.getContentPane().add(lblPrix);
 		
 		textFieldID = new JTextField();
+		textFieldID.addKeyListener(new KeyAdapter() {
+			@Override
+			/**
+			 * Methode pour assurer que seulement les chiffres peuvent etre entrees
+			 */
+			public void keyPressed(KeyEvent e) {
+				char c = e.getKeyChar();		
+				if (Character.isDigit(c) || Character.isISOControl(c)) {
+					textFieldID.setEditable(true);
+				} else {
+					textFieldID.setEditable(false);
+				}
+	   	
+			}
+		});
 		textFieldID.setBounds(192, 46, 154, 20);
 		RapportCommande.getContentPane().add(textFieldID);
 		textFieldID.setColumns(10);
@@ -137,6 +160,21 @@ public class Commande {
 		RapportCommande.getContentPane().add(textFieldDate);
 		
 		textFieldNomEmp = new JTextField();
+		textFieldNomEmp.addKeyListener(new KeyAdapter() {
+			@Override
+			/**
+			 * Methode pour assurer que seulement les lettres peuvent etre entrees
+			 */
+			public void keyPressed(KeyEvent e) {
+				char c = e.getKeyChar();		
+				if (Character.isLetter(c) || Character.isWhitespace(c) || Character.isISOControl(c)) {
+					textFieldNomEmp.setEditable(true);
+				} else {
+					textFieldNomEmp.setEditable(false);
+				}
+	   	
+			}
+		});
 		textFieldNomEmp.setColumns(10);
 		textFieldNomEmp.setBounds(191, 99, 154, 20);
 		RapportCommande.getContentPane().add(textFieldNomEmp);
@@ -147,17 +185,50 @@ public class Commande {
 		RapportCommande.getContentPane().add(textFieldModele);
 		
 		textFieldQuantite = new JTextField();
+		textFieldQuantite.addKeyListener(new KeyAdapter() {
+			@Override
+			/**
+			 * Methode pour assurer que seulement les chiffres peuvent etre entrees
+			 */
+			public void keyPressed(KeyEvent e) {
+				char c = e.getKeyChar();		
+				if (Character.isDigit(c) || Character.isISOControl(c)) {
+					textFieldQuantite.setEditable(true);
+				} else {
+					textFieldQuantite.setEditable(false);
+				}
+	   	
+			}
+		});
 		textFieldQuantite.setColumns(10);
 		textFieldQuantite.setBounds(192, 149, 154, 20);
 		RapportCommande.getContentPane().add(textFieldQuantite);
 		
 		textFieldPrix = new JTextField();
+		textFieldPrix.addKeyListener(new KeyAdapter() {
+			@Override
+			/**
+			 * Methode pour assurer que seulement les chiffres peuvent etre entrees
+			 */
+			public void keyPressed(KeyEvent e) {
+				char c = e.getKeyChar();		
+				if (Character.isDigit(c) || Character.isISOControl(c)) {
+					textFieldPrix.setEditable(true);
+				} else {
+					textFieldPrix.setEditable(false);
+				}
+	   	
+			}
+		});
 		textFieldPrix.setColumns(10);
 		textFieldPrix.setBounds(192, 174, 154, 20);
 		RapportCommande.getContentPane().add(textFieldPrix);
 		
 		JButton btnSave = new JButton("Save");
 		btnSave.addActionListener(new ActionListener() {
+			/**
+			 * Appel de la methode SaveToDB
+			 */
 			public void actionPerformed(ActionEvent e) {
 				SaveToDB();
 			}
@@ -167,6 +238,9 @@ public class Commande {
 		
 		JButton btnUpdate = new JButton("Update");
         btnUpdate.addActionListener(new ActionListener() {
+        	/**
+    		 * Appel de la methode updateData
+    		 */
 			public void actionPerformed(ActionEvent e) {
 				if (table.getSelectedRow()>= 0) {
 				updateData(textFieldID.getText());
@@ -178,6 +252,9 @@ public class Commande {
 		
 		JButton btnDelete = new JButton("Delete");
 		btnDelete.addActionListener(new ActionListener() {
+			/**
+			 * Appel de la methode deleteData
+			 */
 			public void actionPerformed(ActionEvent e) {
 				if (table.getSelectedRow()>= 0) {
 					deleteData(textFieldID.getText());
@@ -200,6 +277,10 @@ public class Commande {
 		table = new JTable();
 		table.addMouseListener(new MouseAdapter() {
 			@Override
+			/**
+			 * Appel de la methode selectData avec come parametre la variable ID
+			 * @param ID Identifiant de l'entree selectionee
+			 */
 			public void mouseClicked(MouseEvent e) {
 				String ID = table.getValueAt(table.getSelectedRow(),0).toString();
 				selectData(ID);
@@ -208,10 +289,27 @@ public class Commande {
 		scrollPane.setViewportView(table);
 		
 		JButton btnExit = new JButton("Exit");
+		btnExit.addActionListener(new ActionListener() {
+			/**
+			 * Methode de sortie du module (Retour a la page acceuil)
+			 */
+			public void actionPerformed(ActionEvent e) {
+			    RapportCommande.setVisible(false);
+	            Acceuil BackAcceuil = new Acceuil();
+	            BackAcceuil.getAcceuil();
+			}
+		});
 		btnExit.setBounds(388, 502, 89, 23);
 		RapportCommande.getContentPane().add(btnExit);
 	
 	}
+	
+	/**
+	 * Connexion entre l'application et la base de donnee MySQL
+	 * @param Driver Connexion au JDBC Driver
+	 *  @param url Lien a la base de donnees
+	 *  @return Connexion reussie
+	 */
 	static Connection Conn() {
 		try {
 			String Driver = "com.mysql.jdbc.Driver";
@@ -224,6 +322,13 @@ public class Commande {
 	return null;	
 	}	
 	
+	/**
+	 * Methode pour sauvegarder les entrees dans la base de donnees
+	 * @param text la date entree dans le formlaire
+	 * @param date La date de vente
+	 * @param Connect Connexion a la base de donnees
+	 * @param query La requete MySQL afin de sauvegarder les donnees
+	 */
 	private void SaveToDB () {
 		String text = textFieldDate.getText();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -247,6 +352,12 @@ public class Commande {
 	System.err.println("Error!!" + e);
 }
 }
+	
+	/**
+	 * Methode pour extraire les donnees de la base de donnees et ensuite les mettre dans une table
+	 * @param Connect Connexion a la base de donnees
+	 * @param showQuery La requete MySQL afin d'extraire les donnees. Ceci est un tableau de chaine de caracteres afin de stocker plusieurs requetes MySQL
+	 */
 	private void ShowData () {
 		Connection Connect = Conn();
 		DefaultTableModel model = new DefaultTableModel();
@@ -284,6 +395,12 @@ public class Commande {
 		System.err.println(e);
 	}
 	}	
+	
+	/**
+	 * Methode pour enyoyer les donnees dans une ligne de la table sur le formulaire
+	 * @param Connect Connexion a la base de donnees
+	 * @param showQuery La requete MySQL afin de selectionner les donnees
+	 */
 	private void selectData(String ID) {
 		Connection Con = Conn();
 		try {
@@ -308,6 +425,12 @@ public class Commande {
 			
 		}  
 	}	
+	
+	/**
+	 * Methode pour la mise a jour de donnees
+	 * @param Con Connexion a la base de donnees
+	 * @param updateQuery La requete MySQL pour la mise a jour
+	 */
 	private void updateData(String ID) {
 		Connection Con = Conn();
 		
@@ -334,6 +457,11 @@ public class Commande {
 
 }
 	
+	/**
+	 * Methode pour la suppression des donnees
+	 * @param Con Connexion a la base de donnees
+	 * @param updateQuery La requete MySQL pour la suppression
+	 */
   private void deleteData (String ID) {
 	  Connection Con = Conn();
 	  try {
@@ -352,6 +480,11 @@ public class Commande {
 		}  	
 	  
   }
+
+	/**
+	 *  Methode getter de ce module
+	 *  
+	 */
   public void getCommandes() {
 	   RapportCommande.setVisible(true);
   }

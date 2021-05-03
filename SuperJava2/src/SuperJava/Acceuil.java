@@ -1,7 +1,7 @@
-//PPE 3: Supercar Java Version 5.75
+//PPE 3: Supercar Java Version 6.0
 //Created By: Aakash Chady
 //Date Created:22/03/2021
-//Date Modified (Version 5.75): 03/05/2021
+//Date Modified (Version 6.0): 03/05/2021
 package SuperJava;
 
 import java.awt.EventQueue;
@@ -63,6 +63,10 @@ public class Acceuil {
 		
 		JButton btnRapportDeVente = new JButton("Rapport De Vente");
 		btnRapportDeVente.addActionListener(new ActionListener() {
+			/**
+			 *  Appel du module Ventes
+			 *  @param RDVente Instance de vente
+			 */
 			public void actionPerformed(ActionEvent e) {
 				Acceuil.setVisible(false);
                 Home RDeVente = new Home();
@@ -74,7 +78,13 @@ public class Acceuil {
 		
         JButton btnRapportDeCommandes = new JButton("Rapport De Commandes");
         btnRapportDeCommandes.addActionListener(new ActionListener() {
+        	
+        	/**
+			 *  Appel du module Commande
+			 *  @param RDCommande stance de Commande
+			 */
 			public void actionPerformed(ActionEvent e) {
+				
 				Acceuil.setVisible(false);
                 Commande RDeCommande = new Commande();
                 RDeCommande.getCommandes();
@@ -83,6 +93,11 @@ public class Acceuil {
 		btnRapportDeCommandes.setBounds(350, 294, 191, 65);
 		Acceuil.getContentPane().add(btnRapportDeCommandes);
 	}
+	
+	/**
+	 *  Methode getter de ce module
+	 *  
+	 */
 	public void getAcceuil() {
 		Acceuil.setVisible(true);
 	}

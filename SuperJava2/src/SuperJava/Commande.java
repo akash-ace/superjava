@@ -1,3 +1,7 @@
+//PPE 3: Supercar Java Version 5.75
+//Created By: Aakash Chady
+//Date Created:22/03/2021
+//Date Modified (Version 5.75): 03/05/2021
 package SuperJava;
 
 import java.awt.EventQueue;
@@ -11,6 +15,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -67,6 +73,12 @@ public class Commande {
 	 */
 	private void initialize() {
 		RapportCommande = new JFrame();
+		RapportCommande.addWindowListener (new WindowAdapter () {
+			@Override
+			public void windowOpened (WindowEvent arg0) {
+				ShowData();
+			}
+		});
 		RapportCommande.setBounds(00, 100, 900, 700);
 		RapportCommande.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		RapportCommande.getContentPane().setLayout(null);

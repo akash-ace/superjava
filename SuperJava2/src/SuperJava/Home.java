@@ -35,7 +35,7 @@ import java.awt.event.ItemEvent;
 
 public class Home {
 
-	private JFrame frame;
+	private JFrame Ventes;
 	private JTextField textFieldID;
 	private JTextField textFieldDate;
 	private JTextField textFieldPrix;
@@ -58,7 +58,7 @@ public class Home {
 			public void run() {
 				try {
 					Home window = new Home();
-					window.frame.setVisible(true);
+					window.Ventes.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -77,86 +77,86 @@ public class Home {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.addWindowListener (new WindowAdapter () {
+		Ventes = new JFrame();
+		Ventes.addWindowListener (new WindowAdapter () {
 			@Override
 			public void windowOpened (WindowEvent arg0) {
 				ShowData();
 			}
 		});
-		frame.setBounds(100, 100, 900, 700);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		Ventes.setBounds(100, 100, 900, 700);
+		Ventes.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Ventes.getContentPane().setLayout(null);
 		
 		JLabel lblId = new JLabel("ID");
 		lblId.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblId.setBounds(10, 41, 48, 14);
-		frame.getContentPane().add(lblId);
+		Ventes.getContentPane().add(lblId);
 		
 		JLabel lblDateVente = new JLabel("Date Vente");
 		lblDateVente.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblDateVente.setBounds(10, 66, 100, 14);
-		frame.getContentPane().add(lblDateVente);
+		Ventes.getContentPane().add(lblDateVente);
 		
 		JLabel lblPrixVentettc = new JLabel("Prix Vente (TTC)");
 		lblPrixVentettc.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblPrixVentettc.setBounds(10, 91, 100, 14);
-		frame.getContentPane().add(lblPrixVentettc);
+		Ventes.getContentPane().add(lblPrixVentettc);
 		
 		JLabel lblNomClient = new JLabel("Nom Client");
 		lblNomClient.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblNomClient.setBounds(10, 116, 100, 14);
-		frame.getContentPane().add(lblNomClient);
+		Ventes.getContentPane().add(lblNomClient);
 		
 		JLabel lblNomEmploye = new JLabel("Nom Employe");
 		lblNomEmploye.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblNomEmploye.setBounds(10, 141, 100, 14);
-		frame.getContentPane().add(lblNomEmploye);
+		Ventes.getContentPane().add(lblNomEmploye);
 		
 		JLabel lblModele = new JLabel("Modele");
 		lblModele.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblModele.setBounds(10, 166, 100, 14);
-		frame.getContentPane().add(lblModele);
+		Ventes.getContentPane().add(lblModele);
 		
 		JLabel lblStatut = new JLabel("Statut");
 		lblStatut.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblStatut.setBounds(10, 191, 100, 14);
-		frame.getContentPane().add(lblStatut);
+		Ventes.getContentPane().add(lblStatut);
 		
 		textFieldID = new JTextField();
 		textFieldID.setBounds(120, 38, 465, 20);
-		frame.getContentPane().add(textFieldID);
+		Ventes.getContentPane().add(textFieldID);
 		textFieldID.setColumns(10);
 		
 		textFieldDate = new JTextField();
 		textFieldDate.setColumns(10);
 		textFieldDate.setBounds(120, 63, 465, 20);
-		frame.getContentPane().add(textFieldDate);
+		Ventes.getContentPane().add(textFieldDate);
 		
 		textFieldPrix = new JTextField();
 		textFieldPrix.setColumns(10);
 		textFieldPrix.setBounds(120, 88, 465, 20);
-		frame.getContentPane().add(textFieldPrix);
+		Ventes.getContentPane().add(textFieldPrix);
 		
 		textFieldNomClient = new JTextField();
 		textFieldNomClient.setColumns(10);
 		textFieldNomClient.setBounds(120, 113, 465, 20);
-		frame.getContentPane().add(textFieldNomClient);
+		Ventes.getContentPane().add(textFieldNomClient);
 		
 		textFieldNomEmp = new JTextField();
 		textFieldNomEmp.setColumns(10);
 		textFieldNomEmp.setBounds(120, 138, 465, 20);
-		frame.getContentPane().add(textFieldNomEmp);
+		Ventes.getContentPane().add(textFieldNomEmp);
 		
 		textFieldModele = new JTextField();
 		textFieldModele.setColumns(10);
 		textFieldModele.setBounds(120, 163, 465, 20);
-		frame.getContentPane().add(textFieldModele);
+		Ventes.getContentPane().add(textFieldModele);
 		
 		textFieldStatus = new JTextField();
 		textFieldStatus.setColumns(10);
 		textFieldStatus.setBounds(120, 188, 465, 20);
-		frame.getContentPane().add(textFieldStatus);
+		Ventes.getContentPane().add(textFieldStatus);
 		
 		JButton btnSave = new JButton("Save");
 		btnSave.addActionListener(new ActionListener() {
@@ -165,11 +165,11 @@ public class Home {
 			}
 		});
 		btnSave.setBounds(130, 219, 89, 23);
-		frame.getContentPane().add(btnSave);
+		Ventes.getContentPane().add(btnSave);
 		
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(10,253, 860, 200);
-		frame.getContentPane().add(scrollPane);
+		Ventes.getContentPane().add(scrollPane);
 		table = new JTable();
 		
 		table.addMouseListener(new MouseAdapter() {
@@ -192,7 +192,7 @@ public class Home {
 		}
 	});
 	buttonUpdate.setBounds(285, 219, 89, 23);
-	frame.getContentPane().add(buttonUpdate);
+	Ventes.getContentPane().add(buttonUpdate);
 	
 	JButton buttonDelete = new JButton("Delete");
 	buttonDelete.addActionListener(new ActionListener() {
@@ -204,12 +204,12 @@ public class Home {
 		}
 	});
 	buttonDelete.setBounds(467, 219, 89, 23);
-	frame.getContentPane().add(buttonDelete);
+	Ventes.getContentPane().add(buttonDelete);
 	
 	JLabel lblFilter = new JLabel("FILTER BY");
 	lblFilter.setFont(new Font("Tahoma", Font.BOLD, 14));
 	lblFilter.setBounds(741, 41, 111, 14);
-	frame.getContentPane().add(lblFilter);
+	Ventes.getContentPane().add(lblFilter);
 	
 
 	comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"None", "Day", "Week", "Month"}));
@@ -222,7 +222,18 @@ public class Home {
 	    };
 	    comboBox_1.addActionListener(actionListener);
 	comboBox_1.setBounds(741, 62, 82, 22);
-	frame.getContentPane().add(comboBox_1);
+	Ventes.getContentPane().add(comboBox_1);
+	
+	JButton btnExit = new JButton("Exit");
+	btnExit.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+		    Ventes.setVisible(false);
+            Acceuil BackAcceuil = new Acceuil();
+            BackAcceuil.getAcceuil();
+		}
+	});
+	btnExit.setBounds(388, 502, 89, 23);
+	Ventes.getContentPane().add(btnExit);
  
 		
 	}
@@ -239,6 +250,8 @@ public class Home {
 		}
 	return null;	
 	}
+	
+	
 	
 	private void SaveToDB () {
 		String text = textFieldDate.getText();
@@ -374,6 +387,10 @@ public class Home {
 				
 			}  	
 		  
+	  }
+	  
+	  public void getVente() {
+		 Ventes.setVisible(true);
 	  }
 	}
 

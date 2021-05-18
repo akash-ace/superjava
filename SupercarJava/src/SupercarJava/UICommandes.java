@@ -205,6 +205,7 @@ public class UICommandes {
 		  
 		PreparedStatement s = Connect.prepareStatement(showQuery);
 		ResultSet r = s.executeQuery();
+		  
 		while (r.next()) {
 			model.addRow(new Object[] {
 			     r.getString("IDCommande"),

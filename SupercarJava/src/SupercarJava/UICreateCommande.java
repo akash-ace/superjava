@@ -317,4 +317,9 @@ public class UICreateCommande {
 		
 	}  	
 	}
+	
+	public void getCreateCommande() {
+		 uicommande.setVisible(true);
+	  }
 }
+

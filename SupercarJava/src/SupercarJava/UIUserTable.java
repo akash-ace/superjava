@@ -293,6 +293,8 @@ public class UIUserTable {
 	  			
 	  		}  	
 	    }
-	
+	public void getUserUI() {
+		 uitableusers.setVisible(true);
+	  }
 	
 }

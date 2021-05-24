@@ -14,6 +14,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Entrepot1 {
 
@@ -73,10 +75,24 @@ public class Entrepot1 {
 		scrollPane.setViewportView(table);
 		
 		JButton btnFaireUneCommande = new JButton("Faire Une Commande");
+		btnFaireUneCommande.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				entrepotpl.setVisible(false);
+				UICreateCommande NewCommande = new UICreateCommande();
+				NewCommande.getCreateCommande();
+			}
+		});
 		btnFaireUneCommande.setBounds(121, 330, 199, 23);
 		entrepotpl.getContentPane().add(btnFaireUneCommande);
 		
 		JButton btnRetour = new JButton("Retour");
+		btnRetour.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+						entrepotpl.setVisible(false);
+						UIEntrepot ThisUI = new UIEntrepot();
+						ThisUI.getEntrepotUI();
+				}
+		});
 		btnRetour.setBounds(460, 330, 156, 23);
 		entrepotpl.getContentPane().add(btnRetour);
 	}
@@ -123,6 +139,9 @@ public class Entrepot1 {
 	} catch (Exception e) {
 		System.err.println(e);
 	}
-	}	
+	}
+	public void getEntrepot1() {
+		 entrepotpl.setVisible(true);
+	  }
 }	
 

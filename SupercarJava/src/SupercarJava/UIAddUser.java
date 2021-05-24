@@ -167,5 +167,7 @@ public class UIAddUser {
 		System.err.println("Error!!" + e);
 	}
 		}
-	
+	public void getAddUserUI() {
+		 uiuser.setVisible(true);
+	  }
 }

@@ -451,5 +451,7 @@ Stock updatedStock = new Stock();
 	}
 		 ShowData();
 	}
-	
+	public void getCommandeUI() {
+		 uicommandes.setVisible(true);
+	  }
 }

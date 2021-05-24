@@ -75,24 +75,59 @@ public class UIEntrepot {
 		scrollPane.setViewportView(table);
 		
 		JButton btnEntrepot1 = new JButton("Voir Plus");
+		btnEntrepot1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				uientrepot.setVisible(false);
+				Entrepot1 ThisEntrepot = new Entrepot1();
+				ThisEntrepot.getEntrepot1();
+			}
+		});
 		btnEntrepot1.setBounds(544, 74, 89, 18);
 		uientrepot.getContentPane().add(btnEntrepot1);
 		
 		JButton btnEntrepot2 = new JButton("Voir Plus");
 		btnEntrepot2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				uientrepot.setVisible(false);
+				Entrepot2 ThisEntrepot = new Entrepot2();
+				ThisEntrepot.getEntrepot2();
 			}
 		});
 		btnEntrepot2.setBounds(544, 90, 89, 18);
 		uientrepot.getContentPane().add(btnEntrepot2);
 		
 		JButton btnEntrepot3 = new JButton("Voir Plus");
+		btnEntrepot3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				uientrepot.setVisible(false);
+				Entrepot3 ThisEntrepot = new Entrepot3();
+				ThisEntrepot.getEntrepot3();
+			}
+		});
 		btnEntrepot3.setBounds(544, 103, 89, 18);
 		uientrepot.getContentPane().add(btnEntrepot3);
 		
 		JButton btnEntrepot4 = new JButton("Voir Plus");
+		btnEntrepot2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				uientrepot.setVisible(false);
+				Entrepot4 ThisEntrepot = new Entrepot4();
+				ThisEntrepot.getEntrepot4();
+			}
+		});
 		btnEntrepot4.setBounds(544, 119, 89, 18);
 		uientrepot.getContentPane().add(btnEntrepot4);
+		
+		JButton btnRetuour = new JButton("Retour");
+		btnRetuour.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				uientrepot.setVisible(false);
+				AdminMenu BackAdmin = new AdminMenu();
+				BackAdmin.getMenuAdmin();
+			}
+		});
+		btnRetuour.setBounds(320, 330, 89, 23);
+		uientrepot.getContentPane().add(btnRetuour);
 	}
 	
 	static Connection Conn() {
@@ -136,4 +171,7 @@ public class UIEntrepot {
 		System.err.println(e);
 	}
 	}	
+	public void getEntrepotUI() {
+		 uientrepot.setVisible(true);
+	  }
 }

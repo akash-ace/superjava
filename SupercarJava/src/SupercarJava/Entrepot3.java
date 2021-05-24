@@ -1,6 +1,8 @@
 package SupercarJava;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.Connection;
@@ -73,10 +75,24 @@ public class Entrepot3 {
 		scrollPane.setViewportView(table);
 		
 		JButton btnFaireUneCommande = new JButton("Faire Une Commande");
+		btnFaireUneCommande.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				phoenixentrepot.setVisible(false);
+				UICreateCommande NewCommande = new UICreateCommande();
+				NewCommande.getCreateCommande();
+			}
+		});
 		btnFaireUneCommande.setBounds(121, 330, 199, 23);
 		phoenixentrepot.getContentPane().add(btnFaireUneCommande);
 		
 		JButton btnRetour = new JButton("Retour");
+		btnRetour.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+						phoenixentrepot.setVisible(false);
+						UIEntrepot ThisUI = new UIEntrepot();
+						ThisUI.getEntrepotUI();
+				}
+		});
 		btnRetour.setBounds(460, 330, 156, 23);
 		phoenixentrepot.getContentPane().add(btnRetour);
 	}
@@ -124,5 +140,7 @@ public class Entrepot3 {
 		System.err.println(e);
 	}
 	}	
-
+	public void getEntrepot3() {
+		 phoenixentrepot.setVisible(true);
+	  }
 }

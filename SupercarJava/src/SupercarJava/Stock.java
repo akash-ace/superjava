@@ -6,77 +6,83 @@ package SupercarJava;
 
 /************************************************************/
 /**
- * 
+ * Classe Stock
  */
 public class Stock {
 	/**
-	 * 
+	 * @param IDStock Attribut pour stocker l'idetifiant du stock
 	 */
 	private int IDStock;
 	/**
-	 * 
+	 * @param NomModele Attribut pour stocker le nom du modele de vehicule
 	 */
 	private String NomModele;
 	/**
-	 * 
+	 * @param IDCommande Attribut pour le prix du modele
 	 */
 	public int PrixModele;
 	/**
-	 * 
+	 * @param IDCommande Attribut pour stocker le pays d'origine du modele
 	 */
 	private String PaysDorigine;
 	/**
-	 * 
+	 * @param IDCommande Attribut pour stocker la quantite en stock
 	 */
 	private int Quantite;
 
 	/**
-	 * 
+	 * @param IDCommande Attribut pour stocker l'idetifiant de l'entrepot ou se trouve le stock
 	 */
 	private int IDEntrepot;
 
 	/**
-	 * 
+	 * Methode getter pour IDStock
+	 * @return IDStock
 	 */
 	public int getIDStock() {
 		return IDStock;
 	}
 
 	/**
-	 * 
+	 * Methode getter pour NomModele
+	 * @return NomModele
 	 */
 	public String getNomModele() {
 		return NomModele;
 	}
 
 	/**
-	 * 
+	 * Methode getter pour PrixModele
+	 * @return PrixModele
 	 */
 	public int getPrixModele() {
 		return PrixModele;
 	}
 	/**
-	 * 
+	 * Methode getter pour PaysDorigine
+	 * @return PaysDorigine
 	 */
 	public String getPaysDorigine() {
 		return PaysDorigine;
 	}
 
 	/**
-	 * 
+	 * Methode getter pour Quantite
+	 * @return Quantite
 	 */
 	public int getQuantite() {
 	    return Quantite;
 	}
 
 	/**
-	 * 
+	 * Methode getter pour IDEntrepot
+	 * @return IDEntrepot
 	 */
 	public int getIDEntrepot() {
 	    return IDEntrepot;
 	}
 	/**
-	 * 
+	 * Methode setter pout le stock de voitures
 	 */
 	public void setStock(String Modele, int PrixModele, String Pays, int NewQuantite, int Entrepot) {
 		this.NomModele = Modele;

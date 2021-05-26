@@ -6,19 +6,19 @@ package SupercarJava;
 
 /************************************************************/
 /**
- * 
+ * Classe Entrepot
  */
 public class Entrepot {
 	/**
-	 * 
+	 * @param IDEntrepot Attribut pour stocker l'idetifiant de l'entrepot
 	 */
 	private int IDEntrepot;
 	/**
-	 * 
+	 * @param Adresse Attribut pour stocker l'adresse de l'entrepot
 	 */
 	private String Adresse;
 	/**
-	 * 
+	 * @param NbVoitures Attribut pour stocker le nombre de voitures dans l'entrepot
 	 */
 	private int NbVoitures;
 	/**
@@ -31,27 +31,30 @@ public class Entrepot {
 	public Commandes commandes;
 
 	/**
-	 * 
+	 * Methode getter pour IDEntrepot
+	 * @return IDEntrepot
 	 */
 	public int getIDEntrepot() {
 		return IDEntrepot;
 	}
 
 	/**
-	 * 
+	 * Methode getter pour Adresse
+	 * @return Adresse
 	 */
 	public String getAdresse() {
 		return Adresse;
 	}
 
 	/**
-	 * 
+	 * Methode getter pour NbVoitures
+	 * @return IDEntrepot
 	 */
 	public int getNbVoitures() {
 		return NbVoitures;
 	}
 	/**
-	 * 
+	 * Methode afin de mettre a jour le nombre de voitures dans un entrepot
 	 */
 	public void updateNbVoitures(int ID, int NewNbVoitures) {
 		 this.IDEntrepot = ID;

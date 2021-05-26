@@ -6,39 +6,39 @@ package SupercarJava;
 
 /************************************************************/
 /**
- * 
+ * Class Commandes
  */
 public class Commandes {
 	/**
-	 * 
+	 * @param IDCommande Attribut pour stocker l'idetifiant de la commande
 	 */
 	 private int IDCommande;
 	/**
-	 * 
+	 * @param IDEntrepot Attribut pour stocker l'idetifiant de l'entrepot
 	 */
 	 private int IDEntrepot;
-		/**
-		 * 
-		 */
+	/**
+	 * @param DateCommande Attribut pour stocker la date de la commande
+	 */
 	 private String DateCommande;
 	/**
-	 * 
+	 * @param NomModele Attribut pour stocker le nom du modele
 	 */
 	private String NomModele;
 	/**
-	 * 
+	 * @param PaysDorigine Attribut pour stocker le pays d'origine du modele
 	 */
 	private String PaysDorigine;
 	/**
-	 * 
+	 * @param NomEmp Attribut pour stocker le nom de l'employe qui passe la commande
 	 */
 	private String NomEmp;
 	/**
-	 * 
+	 * @param Quantite Attribut pour stocker la quantite de modele dans la commande
 	 */
 	private int Quantite;
 	/**
-	 * 
+	 * @param NomEmp Attribut pour stocker le nom de l'employe qui passe la commande
 	 */
 	private int PrixCommande;
 	/**
@@ -47,14 +47,16 @@ public class Commandes {
 	public Stock stock;
 
 	/**
-	 * 
+	 * Methode getter pour IDCommande
+	 * @return IDCommande
 	 */
 	public int getIDCommande() {
 		return IDCommande;
 	}
 
 	/**
-	 * 
+	 * Methode getter pour IDEntrepot
+	 * @return IDEntrepot
 	 */
 	
 	public int getIDEntrepot() {
@@ -62,49 +64,55 @@ public class Commandes {
 	}
 
 	/**
-	 * 
+	 * Methode getter pour DateCommande
+	 * @return DateCommande
 	 */
 	public String getDateCommande() {
 		return DateCommande;
 	}
 
 	/**
-	 * 
+	 * Methode getter pour NomModele
+	 * @return IDCommande
 	 */
 	public String getNomModele() {
 		return NomModele;
 	}
 
 	/**
-	 * 
+	 * Methode getter pour PaysDorigine
+	 * @return PaysDorigine
 	 */
 	public String getPaysDorigine() {
 		return PaysDorigine;
 	}
 
 	/**
-	 * 
+	 * Methode getter pour IDCommande
+	 * @return IDCommande
 	 */
 	public String getNomEmp() {
 		return NomEmp;
 	}
 
 	/**
-	 * 
+	 * Methode getter pour Quantite
+	 * @return Quantite
 	 */
 	public int getQuantite() {
 		return Quantite;
 	}
 
 	/**
-	 * 
+	 * Methode getter pour PrixCommande
+	 * @return PrixCommande
 	 */
 	public int getPrixCommande() {
 		return PrixCommande;
 	}
 
 	/**
-	 * 
+	 * Methode afin de creer une nouvelle commande
 	 */
 	public void createCommande(int Entrepot, String Date, String NomModele,String Pays, String NomEmp, int Quantite, int Prix) {
 		this.IDEntrepot = Entrepot;

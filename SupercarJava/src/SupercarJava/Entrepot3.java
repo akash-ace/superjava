@@ -70,12 +70,19 @@ public class Entrepot3 {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(43, 60, 662, 244);
 		phoenixentrepot.getContentPane().add(scrollPane);
-		
+		/**
+		 * Table permettant de visualiser le stock de l'entrepot 3
+		 */	
 		table = new JTable();
 		scrollPane.setViewportView(table);
-		
+		/**
+		 * Bouton permettant l'acces aux formulaire pour ajouter une commande
+		 */
 		JButton btnFaireUneCommande = new JButton("Faire Une Commande");
 		btnFaireUneCommande.addActionListener(new ActionListener() {
+			/**
+			 * Methode permettant l'acces aux formulaire pour ajouter une commande
+			 */
 			public void actionPerformed(ActionEvent e) {
 				phoenixentrepot.setVisible(false);
 				UICreateCommande NewCommande = new UICreateCommande();
@@ -84,9 +91,14 @@ public class Entrepot3 {
 		});
 		btnFaireUneCommande.setBounds(121, 330, 199, 23);
 		phoenixentrepot.getContentPane().add(btnFaireUneCommande);
-		
+		/**
+		 * Bouton de retour au menu principal entrepots
+		 */
 		JButton btnRetour = new JButton("Retour");
 		btnRetour.addActionListener(new ActionListener() {
+			/**
+			 * Bouton de retour au menu principal entrepots
+			 */
 			public void actionPerformed(ActionEvent e) {
 						phoenixentrepot.setVisible(false);
 						UIEntrepot ThisUI = new UIEntrepot();
@@ -97,6 +109,12 @@ public class Entrepot3 {
 		phoenixentrepot.getContentPane().add(btnRetour);
 	}
 	
+	/**
+	 * Connexion entre l'application et la base de donnee MySQL
+	 * @param Driver Connexion au JDBC Driver
+	 *  @param url Lien a la base de donnees
+	 *  @return Connexion reussie
+	 */
 	static Connection Conn() {
 		try {
 			String Driver = "com.mysql.jdbc.Driver";
@@ -108,6 +126,12 @@ public class Entrepot3 {
 		}
 	return null;	
 	}
+	
+	/**
+	 * Methode pour extraire les donnees de la base de donnees et ensuite les mettre dans une table
+	 * @param Connect Connexion a la base de donnees
+	 * @param showQuery Attribut pour stocker la requete MySQL afin d'extraire les donnees
+	 */
 	private void ShowData () {
 		Connection Connect = Conn();
 		DefaultTableModel model = new DefaultTableModel();
@@ -140,6 +164,9 @@ public class Entrepot3 {
 		System.err.println(e);
 	}
 	}	
+	/**
+	 * Methode getter de ce module
+	 */
 	public void getEntrepot3() {
 		 phoenixentrepot.setVisible(true);
 	  }

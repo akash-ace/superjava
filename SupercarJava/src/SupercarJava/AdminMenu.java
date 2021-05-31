@@ -43,13 +43,20 @@ public class AdminMenu {
 		menuadmin.setBounds(100, 100, 992, 600);
 		menuadmin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		menuadmin.getContentPane().setLayout(null);
-		
+		/**
+		 * Label de bienvenue
+		 */
 		JLabel lblBienvenueAdmin = new JLabel("Bienvenue Admin");
 		lblBienvenueAdmin.setBounds(406, 11, 184, 14);
 		menuadmin.getContentPane().add(lblBienvenueAdmin);
-		
+		/**
+		 * Bouton permettant l'acces aux menu des entrepots
+		 */
 		JButton btnOverviewEntrepots = new JButton("Overview Entrepots");
 		btnOverviewEntrepots.addActionListener(new ActionListener() {
+			/**
+			 * Methode permettant l'acces aux menu des entrepots
+			 */
 			public void actionPerformed(ActionEvent e) {
 				menuadmin.setVisible(false);
 				UIEntrepot ThisUI = new UIEntrepot();
@@ -58,9 +65,14 @@ public class AdminMenu {
 		});
 		btnOverviewEntrepots.setBounds(356, 77, 194, 23);
 		menuadmin.getContentPane().add(btnOverviewEntrepots);
-		
+		/**
+		 * Bouton permettant l'acces aux menu des commandes
+		 */
 		JButton btnOverviewCommandes = new JButton("Overview Commandes");
 		btnOverviewCommandes.addActionListener(new ActionListener() {
+			/**
+			 * Methode permettant l'acces aux menu des commandes
+			 */
 			public void actionPerformed(ActionEvent e) {
 				menuadmin.setVisible(false);
 				UICommandes ThisUI = new UICommandes();
@@ -69,9 +81,14 @@ public class AdminMenu {
 		});
 		btnOverviewCommandes.setBounds(356, 127, 194, 23);
 		menuadmin.getContentPane().add(btnOverviewCommandes);
-		
+		/**
+		 * Bouton permettant l'acces aux menu des utilisateurs
+		 */
 		JButton btnOverviewUtilisateur = new JButton("Overview Utilisateur");
 		btnOverviewUtilisateur.addActionListener(new ActionListener() {
+			/**
+			 * Methode permettant l'acces aux menu des entrepots
+			 */
 			public void actionPerformed(ActionEvent e) {
 				menuadmin.setVisible(false);
 				UIUserTable SeeUsers = new UIUserTable();
@@ -80,9 +97,14 @@ public class AdminMenu {
 		});
 		btnOverviewUtilisateur.setBounds(356, 171, 194, 23);
 		menuadmin.getContentPane().add(btnOverviewUtilisateur);
-		
+		/**
+		 * Bouton permettant l'acces aux formulaire pour ajouter un utilisateur
+		 */
 		JButton btnAjouterUnUtilisateur = new JButton("Ajouter Un Utilisateur");
 		btnAjouterUnUtilisateur.addActionListener(new ActionListener() {
+			/**
+			 * Methode permettant l'acces aux formulaire pour ajouter un utilisateur
+			 */
 			public void actionPerformed(ActionEvent e) {
 				menuadmin.setVisible(false);
 				UIAddUser AddUsers = new UIAddUser();

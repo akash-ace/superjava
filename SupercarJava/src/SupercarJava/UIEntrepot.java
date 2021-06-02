@@ -70,12 +70,19 @@ public class UIEntrepot {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 58, 524, 244);
 		uientrepot.getContentPane().add(scrollPane);
-		
+		/**
+		 * Table permettant de visualiser le stock de tous les entrepots
+		 */
 		table = new JTable();
 		scrollPane.setViewportView(table);
-		
+		/**
+		 * Bouton permettant l'acces aux menu de l'entrepot 1
+		 */
 		JButton btnEntrepot1 = new JButton("Voir Plus");
 		btnEntrepot1.addActionListener(new ActionListener() {
+			/**
+			 * Methode permettant l'acces au menu de l'entrepot 1
+			 */
 			public void actionPerformed(ActionEvent e) {
 				uientrepot.setVisible(false);
 				Entrepot1 ThisEntrepot = new Entrepot1();
@@ -84,9 +91,14 @@ public class UIEntrepot {
 		});
 		btnEntrepot1.setBounds(544, 74, 89, 18);
 		uientrepot.getContentPane().add(btnEntrepot1);
-		
+		/**
+		 * Bouton permettant l'acces aux menu de l'entrepot 2
+		 */
 		JButton btnEntrepot2 = new JButton("Voir Plus");
 		btnEntrepot2.addActionListener(new ActionListener() {
+			/**
+			 * Methode permettant l'acces au menu de l'entrepot 2
+			 */
 			public void actionPerformed(ActionEvent e) {
 				uientrepot.setVisible(false);
 				Entrepot2 ThisEntrepot = new Entrepot2();
@@ -95,9 +107,14 @@ public class UIEntrepot {
 		});
 		btnEntrepot2.setBounds(544, 90, 89, 18);
 		uientrepot.getContentPane().add(btnEntrepot2);
-		
+		/**
+		 * Bouton permettant l'acces aux menu de l'entrepot 3
+		 */
 		JButton btnEntrepot3 = new JButton("Voir Plus");
 		btnEntrepot3.addActionListener(new ActionListener() {
+			/**
+			 * Methode permettant l'acces au menu de l'entrepot 3
+			 */
 			public void actionPerformed(ActionEvent e) {
 				uientrepot.setVisible(false);
 				Entrepot3 ThisEntrepot = new Entrepot3();
@@ -106,9 +123,14 @@ public class UIEntrepot {
 		});
 		btnEntrepot3.setBounds(544, 103, 89, 18);
 		uientrepot.getContentPane().add(btnEntrepot3);
-		
+		/**
+		 * Bouton permettant l'acces aux menu de l'entrepot 4
+		 */
 		JButton btnEntrepot4 = new JButton("Voir Plus");
 		btnEntrepot2.addActionListener(new ActionListener() {
+			/**
+			 * Methode permettant l'acces au menu de l'entrepot 4
+			 */
 			public void actionPerformed(ActionEvent e) {
 				uientrepot.setVisible(false);
 				Entrepot4 ThisEntrepot = new Entrepot4();
@@ -117,9 +139,14 @@ public class UIEntrepot {
 		});
 		btnEntrepot4.setBounds(544, 119, 89, 18);
 		uientrepot.getContentPane().add(btnEntrepot4);
-		
+		/**
+		 * Bouton de retour au menu principal
+		 */
 		JButton btnRetuour = new JButton("Retour");
 		btnRetuour.addActionListener(new ActionListener() {
+			/**
+			 * Methode retour au menu principal
+			 */
 			public void actionPerformed(ActionEvent e) {
 				uientrepot.setVisible(false);
 				AdminMenu BackAdmin = new AdminMenu();
@@ -129,7 +156,12 @@ public class UIEntrepot {
 		btnRetuour.setBounds(320, 330, 89, 23);
 		uientrepot.getContentPane().add(btnRetuour);
 	}
-	
+	/**
+	 * Connexion entre l'application et la base de donnee MySQL
+	 * @param Driver Connexion au JDBC Driver
+	 *  @param url Lien a la base de donnees
+	 *  @return Connexion reussie
+	 */
 	static Connection Conn() {
 		try {
 			String Driver = "com.mysql.jdbc.Driver";
@@ -141,6 +173,11 @@ public class UIEntrepot {
 		}
 	return null;	
 	}
+	/**
+	 * Methode pour extraire les donnees de la base de donnees et ensuite les mettre dans une table
+	 * @param Connect Connexion a la base de donnees
+	 * @param showQuery Attribut pour stocker la requete MySQL afin d'extraire les donnees
+	 */
 	private void ShowData () {
 		Connection Connect = Conn();
 		DefaultTableModel model = new DefaultTableModel();
@@ -171,6 +208,9 @@ public class UIEntrepot {
 		System.err.println(e);
 	}
 	}	
+	/**
+	 * Methode getter de ce module
+   	 */ 
 	public void getEntrepotUI() {
 		 uientrepot.setVisible(true);
 	  }

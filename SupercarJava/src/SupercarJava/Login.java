@@ -61,18 +61,27 @@ public class Login {
 		JLabel lblPassword = new JLabel("Password");
 		lblPassword.setBounds(95, 169, 75, 14);
 		loginframe.getContentPane().add(lblPassword);
-		
+		/**
+		 * @param typeLogin Saisie Login
+		 */
 		typeLogin = new JTextField();
 		typeLogin.setBounds(238, 110, 203, 20);
 		loginframe.getContentPane().add(typeLogin);
 		typeLogin.setColumns(10);
-		
+		/**
+		 * @param typePassword Saisie Mot De Passe
+		 */
 		typePassword = new JPasswordField();
 		typePassword.setBounds(238, 166, 203, 20);
 		loginframe.getContentPane().add(typePassword);
-		
+		/**
+		 * Bouton pour valider les donnees
+		 */
 		JButton btnEnter = new JButton("Enter");
 		btnEnter.addActionListener(new ActionListener() {
+			/**
+			 * Methode appelant la methode checkLoginDetails pour la validation des donnees
+			 */
 			public void actionPerformed(ActionEvent e) {
 				checkLoginDetails();
 			}
@@ -81,12 +90,29 @@ public class Login {
 		loginframe.getContentPane().add(btnEnter);
 	}
 	
+	/**
+	 * Instantion de la classe Accounts
+	 */
 	Accounts ThisUser = new Accounts();
+	/**
+	 * @param loginText contient la valeur de typeLogin
+	 */
 	String loginText = typeLogin.getText();
+	/**
+	 * @param passText contient la valeur de typePassword
+	 */
 	String passText = new String(typePassword.getPassword()); 
+	/**
+	 * @param InputPWD chiffrement des donnees de la valeur passText en utilisant la methode hashPassword de Accounts
+	 */
 	String InputPWD =ThisUser.hashPassword(passText);
 	
-
+	/**
+	 * Connexion entre l'application et la base de donnee MySQL
+	 * @param Driver Connexion au JDBC Driver
+	 *  @param url Lien a la base de donnees
+	 *  @return Connexion reussie
+	 */
 	static Connection Conn() {
 		try {
 			String Driver = "com.mysql.jdbc.Driver";
@@ -99,6 +125,11 @@ public class Login {
 	return null;	
 	}
 	
+	/**
+	 * Methode afin de verifier la validite des donnees entrees
+	 * @param Con Connexion a la base de donnees
+	 * @param SelectQuery Attribut pour stocker la requete MySQL afin de rechercher les donnees dans la base
+	 */
 	private void checkLoginDetails() {
 		Connection Con = Conn();
 		try {

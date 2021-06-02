@@ -79,34 +79,55 @@ public class UIAddUser {
 		lblNotePourAjouter.setBounds(58, 307, 1192, 42);
 		uiuser.getContentPane().add(lblNotePourAjouter);
 		
+		/**
+		 * @param inNom Saisie Du Prenom de l'utilisateur
+		 */
 		inNom = new JTextField();
 		inNom.setBounds(200, 56, 314, 20);
 		uiuser.getContentPane().add(inNom);
 		inNom.setColumns(10);
 		
+		/**
+		 * @param inSurnom Saisie Du Surnom de l'utilisateur
+		 */
 		inSurnom = new JTextField();
 		inSurnom.setColumns(10);
 		inSurnom.setBounds(200, 100, 314, 20);
 		uiuser.getContentPane().add(inSurnom);
 		
+		/**
+		 * @param inLogin Saisie Du Login de l'utilisateur
+		 */
 		inLogin = new JTextField();
 		inLogin.setColumns(10);
 		inLogin.setBounds(200, 139, 314, 20);
 		uiuser.getContentPane().add(inLogin);
 		
+		/**
+		 * @param inPwd Saisie du Mot De Passe de l'utilisateur
+		 */
 		inPwd = new JTextField();
 		inPwd.setColumns(10);
 		inPwd.setBounds(200, 190, 314, 20);
 		uiuser.getContentPane().add(inPwd);
 		
+		/**
+		 * @param inRole Saisie du Role de l'utilisateur
+		 */
 		inRole = new JTextField();
 		inRole.setColumns(10);
 		inRole.setBounds(200, 227, 314, 20);
 		uiuser.getContentPane().add(inRole);
 		
+		/**
+		 * Bouton pout ajouter le nouvel utilisateur
+		 */
 		JButton btnAdd = new JButton("Add");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				/**
+				 * Methode appelant la methode SaveUser pour la sauvegarde des donnees
+				 */
 				SaveUser();
 			}
 		});
@@ -118,18 +139,46 @@ public class UIAddUser {
 		uiuser.getContentPane().add(btnCancel);
 	}
 	
+	/**
+	 * @param NewUser Object de la classe Accounts
+	 */
 	Accounts NewUser = new Accounts();
+	/**
+	 * Methode afin de creer un nouvel utilisateur
+	 */
 	public void createUser() {
+		/**
+		 * @param inName contient la valeur de inNom
+		 */
 		String inName = inNom.getText();
+		/**
+		 * @param inSurname contient la valeur de inSurnom
+		 */
 		String inSurname = inSurnom.getText();
+		/**
+		 *  @param inLgn contient la valeur de inLogin
+		 */
 		String inLgn = inLogin.getText(); 
+		/**
+		 * @param inPass contient la valeur de inPws
+		 */
 		String inPass = inPwd.getText();
+		/**
+		 * @param newRole contient la valeur de inRole
+		 */
 		String newRole = inRole.getText();
-		
+		/**
+		 * Appel de la methode addUser pour stocker les donnees dans les differents attributs
+		 */
 		NewUser.addUser(inName, inSurname, inLgn, inPass, newRole);
 		
 	}
-	
+	/**
+	 * Connexion entre l'application et la base de donnee MySQL
+	 * @param Driver Connexion au JDBC Driver
+	 *  @param url Lien a la base de donnees
+	 *  @return Connexion reussie
+	 */
 	static Connection Conn() {
 		try {
 			String Driver = "com.mysql.jdbc.Driver";
@@ -141,8 +190,15 @@ public class UIAddUser {
 		}
 	return null;	
 	}
-	
+	/**
+	 * Methode afin de verifier la validite des donnees entrees
+	 * @param Connect Connexion a la base de donnees
+	 * @param query Attribut pour stocker la requete MySQL afin d'inserer les donnees dans la base 
+	 */
 	private void SaveUser() {
+	/**
+	* Appel de la methode createUser
+	*/
 	createUser();
 	System.out.println(NewUser.getPassword());
 	
@@ -167,6 +223,9 @@ public class UIAddUser {
 		System.err.println("Error!!" + e);
 	}
 		}
+	/**
+	 * Methode getter de ce module
+   	 */ 
 	public void getAddUserUI() {
 		 uiuser.setVisible(true);
 	  }

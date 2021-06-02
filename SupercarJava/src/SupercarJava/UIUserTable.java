@@ -78,7 +78,9 @@ public class UIUserTable {
 	    JScrollPane scrollPane = new JScrollPane();
 	  		scrollPane.setBounds(43, 60, 892, 244);
 	  		uitableusers.getContentPane().add(scrollPane);
-	  		
+	  		/**
+			 * Table permettant de visualiser tous les utilisateurs
+			 */
 	  		table = new JTable();
 	  		table.addMouseListener(new MouseAdapter() {
 				@Override
@@ -112,50 +114,72 @@ public class UIUserTable {
 	  		JLabel lblRole = new JLabel("Role\r\n");
 	  		lblRole.setBounds(96, 454, 48, 14);
 	  		uitableusers.getContentPane().add(lblRole);
-	  		
+	  		/**
+			 * @param upNom Contient le Prenom de l'utilisateur
+			 */
 	  		upNom = new JTextField();
 	  		upNom.setBounds(171, 352, 193, 20);
 	  		uitableusers.getContentPane().add(upNom);
 	  		upNom.setColumns(10);
-	  		
+	  		/**
+			 * @param upSurnom Contient le Surnom de l'utilisateur
+			 */
 	  		upSurnom = new JTextField();
 	  		upSurnom.setColumns(10);
 	  		upSurnom.setBounds(171, 377, 193, 20);
 	  		uitableusers.getContentPane().add(upSurnom);
-	  		
+	  		/**
+			 * @param upLoginContient le Login de l'utilisateur
+			 */
 	  		upLogin = new JTextField();
 	  		upLogin.setColumns(10);
 	  		upLogin.setBounds(171, 402, 193, 20);
 	  		uitableusers.getContentPane().add(upLogin);
-	  		
+	  		/**
+			 * @param upPwd Contient le Mot De Passe chiffre de l'utilisateur
+			 */
 	  		upPwd = new JTextField();
 	  		upPwd.setColumns(10);
 	  		upPwd.setBounds(171, 426, 193, 20);
 	  		uitableusers.getContentPane().add(upPwd);
-	  		
+	  		/**
+			 * @param upRole Contient Role de l'utilisateur
+			 */
 	  		upRole = new JTextField();
 	  		upRole.setColumns(10);
 	  		upRole.setBounds(171, 451, 193, 20);
 	  		uitableusers.getContentPane().add(upRole);
-	  		
+	  		/**
+			 * Bouton pour enclancher la mise a jour
+			 */
 	  		JButton btnUpdate = new JButton("Update");
 	  		btnUpdate.addActionListener(new ActionListener() {
+	  			/**
+				 * Methode appelant la methode de SaveUser pour la mise a jour 
+				 */
 	  			public void actionPerformed(ActionEvent e) {
 	  			SaveUser();
 	  			}
 	  		});
 	  		btnUpdate.setBounds(79, 508, 89, 23);
 	  		uitableusers.getContentPane().add(btnUpdate);
-	  		
+	  		/**
+			 * Bouton pour enclancher la suppression des donnees 
+			 */
 	  		JButton btnDelete = new JButton("Delete");
 	  		btnDelete.addActionListener(new ActionListener() {
+	  			/**
+				 * Methode appelant la methode deleteData pour la suppression
+				 */
 	  			public void actionPerformed(ActionEvent e) {
 	  				deleteData();
 	  			}
 	  		});
 	  		btnDelete.setBounds(219, 508, 89, 23);
 	  		uitableusers.getContentPane().add(btnDelete);
-	  		
+	  		/**
+			 * Methode pour l'annulation
+			 */
 	  		JButton btnCancel = new JButton("Cancel");
 	  		btnCancel.setBounds(346, 508, 89, 23);
 	  		uitableusers.getContentPane().add(btnCancel);
@@ -164,7 +188,12 @@ public class UIUserTable {
 			
 	  		
 	}
-	
+	/**
+	 * Connexion entre l'application et la base de donnee MySQL
+	 * @param Driver Connexion au JDBC Driver
+	 *  @param url Lien a la base de donnees
+	 *  @return Connexion reussie
+	 */
 	static Connection Conn() {
 		try {
 			String Driver = "com.mysql.jdbc.Driver";
@@ -176,6 +205,12 @@ public class UIUserTable {
 		}
 	return null;	
 	}
+	
+	/**
+	 * Methode pour extraire les donnees de la base de donnees et ensuite les mettre dans une table
+	 * @param Connect Connexion a la base de donnees
+	 * @param showQuery Attribut pour stocker la requete MySQL afin d'extraire les donnees
+	 */
 	private void ShowData () {
 		Connection Connect = Conn();
 		DefaultTableModel model = new DefaultTableModel();
@@ -211,7 +246,11 @@ public class UIUserTable {
 		System.err.println(e);
 	}
 	}	
-	
+	/**
+	 * Methode pour inserer une ligne de donnees dans le formulaire
+	 * @param Con Connexion a la base de donnees
+	 * @param showQuery Attribut pour stocker la requete MySQL afin d'extraire les donnees
+	 */
 	private void selectData(String ID) {
 		Connection Con = Conn();
 		try {
@@ -237,20 +276,50 @@ public class UIUserTable {
 		}  
 	}
 	
+	/**
+	 * @param NewUser Object de la classe Accounts
+	 */
 	Accounts UpdatedUser = new Accounts();
+	/**
+	 * Methode afin de creer un nouvel utilisateur
+	 */
 	public void updateUser() {
+		/**
+		 * @param upName contient la valeur de upNom
+		 */
 		String upName = upNom.getText();
+		/**
+		 * @param upSurname contient la valeur de upSurnom
+		 */
 		String upSurname = upSurnom.getText();
+		/**
+		 * @param upLgn contient la valeur de upLogin
+		 */
 		String upLgn = upLogin.getText(); 
+		/**
+		 * @param upPass contient la valeur de upPwd
+		 */
 		String upPass = upPwd.getText();
+		/**
+		 * @param moddedRole contient la valeur de upRole
+		 */
 		String moddedRole = upRole.getText();
-		
+		/**
+		 * Appel de la methode addUser pour stocker les donnees dans les differents attributs
+		 */
 		UpdatedUser.addUser(upName, upSurname, upLgn, upPass, moddedRole);
 		
 	}
 	
-	
+	/**
+	 * Methode de sauvegarde
+	 * @param Connect Connexion a la base de donnees
+	 * @param query Attribut pour stocker la requete MySQL afin d'inserer les donnees dans la base 
+	 */
 	private void SaveUser() {
+		/**
+		* Appel de la methode updateUser
+		*/
 	updateUser();
 	
 	
@@ -275,7 +344,11 @@ public class UIUserTable {
 		System.err.println("Error!!" + e);
 	}
 	}
-	
+	/**
+   	 * Methode pour supprimer les donnees
+     * @param Con Connexion a la base de donnees
+   	 * @param DeleteQuery Attribut pour stocker la requete MySQL afin de supprimer les donnees
+   	 */ 
 	private void deleteData () {
 	  	  Connection Con = Conn();
 	  	  try {
@@ -293,6 +366,9 @@ public class UIUserTable {
 	  			
 	  		}  	
 	    }
+	/**
+	 * Methode getter de ce module
+   	 */ 
 	public void getUserUI() {
 		 uitableusers.setVisible(true);
 	  }

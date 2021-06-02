@@ -83,7 +83,9 @@ public class UICommandes {
 	    JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(43, 60, 892, 244);
 		uicommandes.getContentPane().add(scrollPane);
-		
+		/**
+		 * Table permettant de visualiser toutes les commandes faites
+		 */
 		table = new JTable();
 		table.addMouseListener(new MouseAdapter() {
 			@Override
@@ -121,49 +123,72 @@ public class UICommandes {
 		JLabel lblPrix = new JLabel("Prix");
 		lblPrix.setBounds(31, 475, 106, 14);
 		uicommandes.getContentPane().add(lblPrix);
-		
+		/**
+		 * @param upID Contient l'identifiant de l'entrepot
+		 */
 		upID = new JTextField();
 		upID.setBounds(147, 331, 190, 20);
 		uicommandes.getContentPane().add(upID);
 		upID.setColumns(10);
-		
+		/**
+		 * @param upDate Contient la date de la commande
+		 */
 		upDate = new JTextField();
 		upDate.setColumns(10);
 		upDate.setBounds(147, 354, 190, 20);
 		uicommandes.getContentPane().add(upDate);
-		
+		/**
+		 * @param upModele Contient le modele commande
+		 */
 		upModele = new JTextField();
 		upModele.setColumns(10);
 		upModele.setBounds(147, 401, 190, 20);
 		uicommandes.getContentPane().add(upModele);
-		
+		/**
+		 * @param upPays Contient le pays d'origine de la commande 
+		 */
 		upPays = new JTextField();
 		upPays.setColumns(10);
 		upPays.setBounds(147, 423, 190, 20);
 		uicommandes.getContentPane().add(upPays);
-		
+		/**
+		 * @param upQuantite Contient la quantite de modele commandee
+		 */
 		upQuantite = new JTextField();
 		upQuantite.setColumns(10);
 		upQuantite.setBounds(147, 447, 190, 20);
 		uicommandes.getContentPane().add(upQuantite);
-		
+		/**
+		 * @param inPwd Contient le prix de la comande
+		 */
 		upPrix = new JTextField();
 		upPrix.setColumns(10);
 		upPrix.setBounds(147, 472, 190, 20);
 		uicommandes.getContentPane().add(upPrix);
-		
+		/**
+		 * Bouton pour enclancher la mise a jour
+		 */
 		JButton btnUpdate = new JButton("Update");
 		btnUpdate.addActionListener(new ActionListener() {
+			/**
+			 * Methode appelant la methode updateCommande pour la mise a jour
+			 */
 			public void actionPerformed(ActionEvent e) {
 				UpdateCommande();
 			}
 		});
 		btnUpdate.setBounds(31, 515, 89, 23);
 		uicommandes.getContentPane().add(btnUpdate);
-		
+		/**
+		 * Bouton pour supprimer la commande
+		 */
 		JButton btnDelete = new JButton("Delete");
 		btnDelete.addActionListener(new ActionListener() {
+			/**
+			 * Methode appelant la methode deleteData pour la suppression de la commande
+			 */
 			public void actionPerformed(ActionEvent e) {
+				
 				deleteData();
 			}
 		});
@@ -173,13 +198,20 @@ public class UICommandes {
 		JLabel lblNomEmploye = new JLabel("Nom Employe");
 		lblNomEmploye.setBounds(31, 382, 106, 14);
 		uicommandes.getContentPane().add(lblNomEmploye);
-		
+		/**
+		 * @param upNomEmp Contient le nom de l'employe qui a formule la commande
+		 */	
 		upNomEmp = new JTextField();
 		upNomEmp.setColumns(10);
 		upNomEmp.setBounds(147, 379, 190, 20);
 		uicommandes.getContentPane().add(upNomEmp);
 	}		
-	
+	/**
+	 * Connexion entre l'application et la base de donnee MySQL
+	 * @param Driver Connexion au JDBC Driver
+	 *  @param url Lien a la base de donnees
+	 *  @return Connexion reussie
+	 */
 	static Connection Conn() {
 		try {
 			String Driver = "com.mysql.jdbc.Driver";
@@ -191,6 +223,11 @@ public class UICommandes {
 		}
 	return null;	
 	}
+	/**
+	 * Methode pour extraire les donnees de la base de donnees et ensuite les mettre dans une table
+	 * @param Connect Connexion a la base de donnees
+	 * @param showQuery Attribut pour stocker la requete MySQL afin d'extraire les donnees
+	 */
 	private void ShowData () {
 		Connection Connect = Conn();
 		DefaultTableModel model = new DefaultTableModel();
@@ -216,6 +253,9 @@ public class UICommandes {
 	            r.getString("PaysDorigine"),
 	             r.getString("Quantite"),
 	            r.getString("PrixCommande"),
+	            /**
+	        	 * @param upIDCommande contient l'identifiant de la commande
+	        	 */
 	            upIDCommande = r.getInt("IDCommande"),
 			} );
 			
@@ -229,6 +269,12 @@ public class UICommandes {
 		System.err.println(e);
 	}
 	}	
+	
+	/**
+	 * Methode pour inserer une ligne de donnees dans le formulaire
+	 * @param Con Connexion a la base de donnees
+	 * @param showQuery Attribut pour stocker la requete MySQL afin d'extraire les donnees
+	 */
 	private void selectData(String ID) {
 		Connection Con = Conn();
 		try {
@@ -255,9 +301,23 @@ public class UICommandes {
 		}  
 	}
 	
+	/**
+	 * @param updatedCommande Object de la classe Commandes
+	 */
 Commandes updatedCommande = new Commandes();
 
-	
+/**
+ * Methode afin de mettre a jour une commande
+ * @param NewDate contient la valeur de UpDate
+ * @param NewModele contient la valeur de UpModele
+ * @param NewPays contient la valeur de UpPays 
+ * @param NewNomEmp contient la valeur de UpNomEmp
+ * @param NewID contient la valeur de upIDCommande
+ * @param NewEntrepot contient la valeur de upID
+ * @param NewQuantite contient la valeur de upQuantite
+ * @param NewPrix contient la valeur de upPrix
+ * 
+ */
     public void addCommande() {
     	String NewDate =   upDate.getText();
     	String NewModele = upModele.getText();
@@ -267,10 +327,22 @@ Commandes updatedCommande = new Commandes();
     	int NewEntrepot = Integer.parseInt(upID.getText());
     	int NewQuantite = Integer.parseInt(upQuantite.getText());
     	int NewPrix = Integer.parseInt(upPrix.getText());
+    	/**
+    	 * Appel de la methode updateCommande
+    	 */
     	updatedCommande.updateCommande(NewID, NewEntrepot, NewDate,NewModele, NewPays,NewNomEmp, NewQuantite, NewPrix);
     }
 	
+    
+    /**
+	 * Methode pour inserer une ligne de donnees dans le formulaire
+	 * @param Connect Connexion a la base de donnees
+	 * @param query Attribut pour stocker la requete MySQL afin de mettre a jour les donnees
+	 */
     private void UpdateCommande() {
+    	/**
+    	 * Appel de la methode addCommande
+    	 */
 		addCommande();
 		
 		
@@ -295,18 +367,33 @@ Commandes updatedCommande = new Commandes();
 		System.err.println("Error!!" + e);
 	}
 		}
-    
+    /**
+     * @param updatedStock Object de la classe Stock
+	 */  
 Stock updatedStock = new Stock();
-	
+/**
+ * Methode pour mettre a jour le stock de l'entrepot
+ * @param NomModele Attribut pour stocker la valeur de  updatedCommande.NomModele appele en utilisant la methode getter de cet attribut
+ * @param NomModele Attribut pour stocker la valeur de  updatedCommande.PrixCommande appele en utilisant la methode getter de cet attribut
+ * @param NomModele Attribut pour stocker la valeur de  updatedCommande.Quantite appele en utilisant la methode getter de cet attribut
+ * @param PrixParModele Attribut pour stocker le prix par modele de voiture
+ */
 	private void StockUpdate() {
 		String NomModele = updatedCommande.getNomModele();
 		int TotalPrix = updatedCommande.getPrixCommande();
 		int QuantiteModele = updatedCommande.getQuantite();
 		int PrixParModele = TotalPrix/QuantiteModele;
+		/**
+		 * Appel De La Methode setStock
+		 */
 		updatedStock.setStock(NomModele, PrixParModele, updatedCommande.getPaysDorigine(), updatedCommande.getQuantite(),updatedCommande.getIDEntrepot());
 		System.out.println(updatedStock.getNomModele());
 	}
-	
+	/**
+	 * Methode afin de determiner si le nombre de modeles restants apres suppression = 0
+	 * @param Connect Connexion a la base de donnees
+	 * @param searchQuery Attribut pour stocker la requete MySQL afin de chercher les donnees dans la base
+	 */
 	 private void  checkIfZero(){
 			Connection Connect = Conn();
 		try {	
@@ -321,6 +408,9 @@ Stock updatedStock = new Stock();
 			if (r.next()) {
 			int StockCount = r.getInt("Quantite") + updatedCommande.getQuantite();
 			if (StockCount == 0) {
+				/**
+			     * Si StockCount = 0, alors on appele la methode deleteData
+			  	 */
 				deleteData();
 			} 
 			}
@@ -329,7 +419,11 @@ Stock updatedStock = new Stock();
 			
 		}  
 		}
-    
+	 /**
+	 * Methode pour determiner le nombre de modeles venant du meme pays dans le meme entrepot
+     * @param Connect Connexion a la base de donnees
+	 * @param searchQuery Attribut pour stocker la requete MySQL afin de chercher les donnees
+	 */ 
     private void  determineStock(){
 		Connection Connect = Conn();
 	try {	
@@ -342,6 +436,9 @@ Stock updatedStock = new Stock();
 		ps.setString(3, updatedCommande.getPaysDorigine());
 		ResultSet r = ps.executeQuery();
 		if (r.next()) {
+	    /**
+		 * Appel de la methode updateData
+		  */
 	     updateData();
 			} else {
 				System.out.println("Ca ne marche Pas");
@@ -353,6 +450,11 @@ Stock updatedStock = new Stock();
 	}  	
 	}
     
+    /**
+   	 * Methode pour mettre a jour les donnees
+     * @param Connect Connexion a la base de donnees
+   	 * @param UpdateQuery Attribut pour stocker la requete MySQL afin de mettre a jour le stock
+   	 */ 
     private void updateData() {
 		StockUpdate();
 		Connection Connect = Conn();
@@ -376,7 +478,11 @@ Stock updatedStock = new Stock();
 		}  	
     
    
-    
+    /**
+   	 * Methode pour supprimmer les donees 
+     * @param Con Connexion a la base de donnees
+   	 * @param DeleteQuery Attribut pour stocker la requete MySQL afin de supprimer les donnees
+   	 */ 
     private void deleteData () {
   	  Connection Con = Conn();
   	  try {
@@ -392,10 +498,17 @@ Stock updatedStock = new Stock();
   		} catch (Exception e) {
   			System.err.println(e);
   			
-  		}  	
+  		}  
+  	/**
+  	 * Appel de la methode updateDataAfterDelete
+     */ 
   	  updateDataAfterDelete();
     }
-    
+    /**
+   	 * Methode pour inserer une ligne de donnees dans le formulaire
+     * @param Connect Connexion a la base de donnees
+   	 * @param UpdateQuery Attribut pour stocker la requete MySQL afin de mettre a jour les donnees dans la base de donnees stock
+   	 */ 
     private void updateDataAfterDelete() {
 		Connection Connect = Conn();
 		
@@ -411,11 +524,22 @@ Stock updatedStock = new Stock();
 		} catch (Exception e) {
 			System.err.println(e);
 		}	
+		/**
+		 * Appel de la methode setEntrepot
+		 */ 
 		   setEntrepot();
 		  
 		}  	
-    
+    /**
+     * @param Lentrepot Object de la classe Entrepot
+   	 */ 
 	Entrepot Lentrepot = new Entrepot();
+	/**
+   	 * Methode pour mettre a jour le nombre de modeles dans un entrepot
+     * @param Connect Connexion a la base de donnees
+   	 * @param getCount Attribut pour stocker la requete MySQL afin de recevoir la quantite totale du stock 
+   	 * @param StockCount Attribut pour stocker le nombre de voitures dans l'entrepot
+   	 */ 
 	private void setEntrepot() {
 		Connection Connect = Conn();
 		try {
@@ -428,14 +552,24 @@ Stock updatedStock = new Stock();
 			if (r.next()) {
 		    StockCount = r.getInt("NbVoitures");
 			}
+			/**
+			 * Appel de la methode updateNbVoitures
+			 */ 
 			Lentrepot.updateNbVoitures(updatedCommande.getIDEntrepot(), StockCount);
 		} catch (Exception e) {
 			System.err.println(e);
 			
 		} 
+		/**
+		 *Appel de la methode updateEntrepotStock
+	   	 */ 
 		updateEntrepotStock();
 	}
-	
+	/**
+   	 * Methode pour mettre a jour la table entrepot
+     * @param Connect Connexion a la base de donnees
+   	 * @param UpdateQuery Attribut pour stocker la requete MySQL afin de mettre a jour les donnees dans la table entrepot
+   	 */ 
 	private void updateEntrepotStock() {
 		
 		Connection Connect = Conn();
@@ -449,8 +583,14 @@ Stock updatedStock = new Stock();
 		System.err.println(e);
 		
 	}
+		/**
+		 * Appel de la methode ShowData
+	   	 */ 
 		 ShowData();
 	}
+	/**
+	 * Methode getter de ce module
+   	 */ 
 	public void getCommandeUI() {
 		 uicommandes.setVisible(true);
 	  }

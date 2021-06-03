@@ -12,6 +12,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
 
 public class UIAddUser {
@@ -83,6 +85,21 @@ public class UIAddUser {
 		 * @param inNom Saisie Du Prenom de l'utilisateur
 		 */
 		inNom = new JTextField();
+		inNom.addKeyListener(new KeyAdapter() {
+			@Override
+			/**
+			 * Methode pour assurer que la valeur entree est dans le bon format
+			 */
+			public void keyPressed(KeyEvent e) {
+				char c = e.getKeyChar();		
+				if (Character.isLetter(c) || Character.isISOControl(c)) {
+					inNom.setEditable(true);
+				} else {
+					inNom.setEditable(false);
+				}
+	   	
+			}
+		});
 		inNom.setBounds(200, 56, 314, 20);
 		uiuser.getContentPane().add(inNom);
 		inNom.setColumns(10);
@@ -91,6 +108,21 @@ public class UIAddUser {
 		 * @param inSurnom Saisie Du Surnom de l'utilisateur
 		 */
 		inSurnom = new JTextField();
+		inSurnom.addKeyListener(new KeyAdapter() {
+			@Override
+			/**
+			 * Methode pour assurer que la valeur entree est dans le bon format
+			 */
+			public void keyPressed(KeyEvent e) {
+				char c = e.getKeyChar();		
+				if (Character.isLetter(c) || Character.isISOControl(c)) {
+					inSurnom.setEditable(true);
+				} else {
+					inSurnom.setEditable(false);
+				}
+	   	
+			}
+		});
 		inSurnom.setColumns(10);
 		inSurnom.setBounds(200, 100, 314, 20);
 		uiuser.getContentPane().add(inSurnom);
@@ -99,6 +131,21 @@ public class UIAddUser {
 		 * @param inLogin Saisie Du Login de l'utilisateur
 		 */
 		inLogin = new JTextField();
+		inLogin.addKeyListener(new KeyAdapter() {
+			@Override
+			/**
+			 * Methode pour assurer que la valeur entree est dans le bon format
+			 */
+			public void keyPressed(KeyEvent e) {
+				char c = e.getKeyChar();		
+				if (Character.isLetter(c) || Character.isDigit(c) || Character.isISOControl(c)) {
+					inLogin.setEditable(true);
+				} else {
+					inLogin.setEditable(false);
+				}
+	   	
+			}
+		});
 		inLogin.setColumns(10);
 		inLogin.setBounds(200, 139, 314, 20);
 		uiuser.getContentPane().add(inLogin);
@@ -107,6 +154,21 @@ public class UIAddUser {
 		 * @param inPwd Saisie du Mot De Passe de l'utilisateur
 		 */
 		inPwd = new JTextField();
+		inPwd.addKeyListener(new KeyAdapter() {
+			@Override
+			/**
+			 * Methode pour assurer que la valeur entree est dans le bon format
+			 */
+			public void keyPressed(KeyEvent e) {
+				char c = e.getKeyChar();		
+				if (Character.isLetter(c) || Character.isDigit(c) || Character.isISOControl(c)) {
+					inPwd.setEditable(true);
+				} else {
+					inPwd.setEditable(false);
+				}
+	   	
+			}
+		});
 		inPwd.setColumns(10);
 		inPwd.setBounds(200, 190, 314, 20);
 		uiuser.getContentPane().add(inPwd);
@@ -115,6 +177,21 @@ public class UIAddUser {
 		 * @param inRole Saisie du Role de l'utilisateur
 		 */
 		inRole = new JTextField();
+		inRole.addKeyListener(new KeyAdapter() {
+			@Override
+			/**
+			 * Methode pour assurer que la valeur entree est dans le bon format
+			 */
+			public void keyPressed(KeyEvent e) {
+				char c = e.getKeyChar();		
+				if (Character.isLetter(c) || Character.isDigit(c) || Character.isISOControl(c)) {
+					inRole.setEditable(true);
+				} else {
+					inRole.setEditable(false);
+				}
+	   	
+			}
+		});
 		inRole.setColumns(10);
 		inRole.setBounds(200, 227, 314, 20);
 		uiuser.getContentPane().add(inRole);
@@ -135,6 +212,19 @@ public class UIAddUser {
 		uiuser.getContentPane().add(btnAdd);
 		
 		JButton btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(new ActionListener() {
+			/**
+			 * Methode pour appeler la methode d'annulation
+			 */
+			public void actionPerformed(ActionEvent e) {
+				inNom.setText("");
+				inSurnom.setText("");
+				inLogin.setText("");
+			    inPwd.setText("");
+				inRole.setText("");
+			}
+		});
+		
 		btnCancel.setBounds(335, 273, 89, 23);
 		uiuser.getContentPane().add(btnCancel);
 	}

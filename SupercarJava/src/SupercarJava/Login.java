@@ -14,6 +14,8 @@ import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
 
 public class Login {
@@ -65,6 +67,21 @@ public class Login {
 		 * @param typeLogin Saisie Login
 		 */
 		typeLogin = new JTextField();
+		typeLogin.addKeyListener(new KeyAdapter() {
+			@Override
+			/**
+			 * Methode pour assurer que la valeur entree est dans le bon format
+			 */
+			public void keyPressed(KeyEvent e) {
+				char c = e.getKeyChar();		
+				if (Character.isLetter(c) || Character.isDigit(c) || Character.isISOControl(c)) {
+					typeLogin.setEditable(true);
+				} else {
+					typeLogin.setEditable(false);
+				}
+	   	
+			}
+		});
 		typeLogin.setBounds(238, 110, 203, 20);
 		loginframe.getContentPane().add(typeLogin);
 		typeLogin.setColumns(10);
@@ -72,6 +89,21 @@ public class Login {
 		 * @param typePassword Saisie Mot De Passe
 		 */
 		typePassword = new JPasswordField();
+		typePassword.addKeyListener(new KeyAdapter() {
+			@Override
+			/**
+			 * Methode pour assurer que la valeur entree est dans le bon format
+			 */
+			public void keyPressed(KeyEvent e) {
+				char c = e.getKeyChar();		
+				if (Character.isLetter(c) || Character.isDigit(c) || Character.isISOControl(c)) {
+					typePassword.setEditable(true);
+				} else {
+					typePassword.setEditable(false);
+				}
+	   	
+			}
+		});
 		typePassword.setBounds(238, 166, 203, 20);
 		loginframe.getContentPane().add(typePassword);
 		/**

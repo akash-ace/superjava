@@ -3,6 +3,8 @@ package SupercarJava;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
@@ -118,6 +120,21 @@ public class UIUserTable {
 			 * @param upNom Contient le Prenom de l'utilisateur
 			 */
 	  		upNom = new JTextField();
+	  		upNom.addKeyListener(new KeyAdapter() {
+				@Override
+				/**
+				 * Methode pour assurer que la valeur entree est dans le bon format
+				 */
+				public void keyPressed(KeyEvent e) {
+					char c = e.getKeyChar();		
+					if (Character.isLetter(c) || Character.isISOControl(c)) {
+						upNom.setEditable(true);
+					} else {
+						upNom.setEditable(false);
+					}
+		   	
+				}
+			});
 	  		upNom.setBounds(171, 352, 193, 20);
 	  		uitableusers.getContentPane().add(upNom);
 	  		upNom.setColumns(10);
@@ -125,6 +142,21 @@ public class UIUserTable {
 			 * @param upSurnom Contient le Surnom de l'utilisateur
 			 */
 	  		upSurnom = new JTextField();
+	  		upSurnom.addKeyListener(new KeyAdapter() {
+				@Override
+				/**
+				 * Methode pour assurer que la valeur entree est dans le bon format
+				 */
+				public void keyPressed(KeyEvent e) {
+					char c = e.getKeyChar();		
+					if (Character.isLetter(c) || Character.isISOControl(c)) {
+						upSurnom.setEditable(true);
+					} else {
+						upSurnom.setEditable(false);
+					}
+		   	
+				}
+			});
 	  		upSurnom.setColumns(10);
 	  		upSurnom.setBounds(171, 377, 193, 20);
 	  		uitableusers.getContentPane().add(upSurnom);
@@ -132,6 +164,21 @@ public class UIUserTable {
 			 * @param upLoginContient le Login de l'utilisateur
 			 */
 	  		upLogin = new JTextField();
+	  		upLogin.addKeyListener(new KeyAdapter() {
+				@Override
+				/**
+				 * Methode pour assurer que la valeur entree est dans le bon format
+				 */
+				public void keyPressed(KeyEvent e) {
+					char c = e.getKeyChar();		
+					if (Character.isLetter(c) || Character.isDigit(c) || Character.isISOControl(c)) {
+						upLogin.setEditable(true);
+					} else {
+						upLogin.setEditable(false);
+					}
+		   	
+				}
+			});
 	  		upLogin.setColumns(10);
 	  		upLogin.setBounds(171, 402, 193, 20);
 	  		uitableusers.getContentPane().add(upLogin);
@@ -139,6 +186,21 @@ public class UIUserTable {
 			 * @param upPwd Contient le Mot De Passe chiffre de l'utilisateur
 			 */
 	  		upPwd = new JTextField();
+	  		upPwd.addKeyListener(new KeyAdapter() {
+				@Override
+				/**
+				 * Methode pour assurer que la valeur entree est dans le bon format
+				 */
+				public void keyPressed(KeyEvent e) {
+					char c = e.getKeyChar();		
+					if (Character.isLetter(c) || Character.isDigit(c) || Character.isISOControl(c)) {
+						upPwd.setEditable(true);
+					} else {
+						upPwd.setEditable(false);
+					}
+		   	
+				}
+			});
 	  		upPwd.setColumns(10);
 	  		upPwd.setBounds(171, 426, 193, 20);
 	  		uitableusers.getContentPane().add(upPwd);
@@ -146,6 +208,21 @@ public class UIUserTable {
 			 * @param upRole Contient Role de l'utilisateur
 			 */
 	  		upRole = new JTextField();
+	  		upRole.addKeyListener(new KeyAdapter() {
+				@Override
+				/**
+				 * Methode pour assurer que la valeur entree est dans le bon format
+				 */
+				public void keyPressed(KeyEvent e) {
+					char c = e.getKeyChar();		
+					if (Character.isLetter(c) || Character.isDigit(c) || Character.isISOControl(c)) {
+						upRole.setEditable(true);
+					} else {
+						upRole.setEditable(false);
+					}
+		   	
+				}
+			});
 	  		upRole.setColumns(10);
 	  		upRole.setBounds(171, 451, 193, 20);
 	  		uitableusers.getContentPane().add(upRole);

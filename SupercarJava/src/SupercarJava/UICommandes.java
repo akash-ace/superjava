@@ -19,6 +19,8 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
 
 
@@ -127,6 +129,21 @@ public class UICommandes {
 		 * @param upID Contient l'identifiant de l'entrepot
 		 */
 		upID = new JTextField();
+		upID.addKeyListener(new KeyAdapter() {
+			@Override
+			/**
+			 * Methode pour assurer que seulement les chiffres peuvent etre entrees
+			 */
+			public void keyPressed(KeyEvent e) {
+				char c = e.getKeyChar();		
+				if (Character.isDigit(c) || Character.isISOControl(c)) {
+					upID.setEditable(true);
+				} else {
+					upID.setEditable(false);
+				}
+	   	
+			}
+		});
 		upID.setBounds(147, 331, 190, 20);
 		uicommandes.getContentPane().add(upID);
 		upID.setColumns(10);
@@ -134,6 +151,21 @@ public class UICommandes {
 		 * @param upDate Contient la date de la commande
 		 */
 		upDate = new JTextField();
+		upDate.addKeyListener(new KeyAdapter() {
+			@Override
+			/**
+			 * Methode pour assurer que seulement les chiffres peuvent etre entrees
+			 */
+			public void keyPressed(KeyEvent e) {
+				char c = e.getKeyChar();		
+				if (Character.isDigit(c) || Character.isISOControl(c)) {
+					upDate.setEditable(true);
+				} else {
+					upDate.setEditable(false);
+				}
+	   	
+			}
+		});
 		upDate.setColumns(10);
 		upDate.setBounds(147, 354, 190, 20);
 		uicommandes.getContentPane().add(upDate);
@@ -148,6 +180,21 @@ public class UICommandes {
 		 * @param upPays Contient le pays d'origine de la commande 
 		 */
 		upPays = new JTextField();
+		upPays.addKeyListener(new KeyAdapter() {
+			@Override
+			/**
+			 * Methode pour assurer que seulement les chiffres peuvent etre entrees
+			 */
+			public void keyPressed(KeyEvent e) {
+				char c = e.getKeyChar();		
+				if (Character.isLetter(c) || Character.isISOControl(c)) {
+					upPays.setEditable(true);
+				} else {
+					upPays.setEditable(false);
+				}
+	   	
+			}
+		});
 		upPays.setColumns(10);
 		upPays.setBounds(147, 423, 190, 20);
 		uicommandes.getContentPane().add(upPays);
@@ -155,6 +202,21 @@ public class UICommandes {
 		 * @param upQuantite Contient la quantite de modele commandee
 		 */
 		upQuantite = new JTextField();
+		upQuantite.addKeyListener(new KeyAdapter() {
+			@Override
+			/**
+			 * Methode pour assurer que seulement les chiffres peuvent etre entrees
+			 */
+			public void keyPressed(KeyEvent e) {
+				char c = e.getKeyChar();		
+				if (Character.isDigit(c) || Character.isISOControl(c)) {
+					upQuantite.setEditable(true);
+				} else {
+					upQuantite.setEditable(false);
+				}
+	   	
+			}
+		});
 		upQuantite.setColumns(10);
 		upQuantite.setBounds(147, 447, 190, 20);
 		uicommandes.getContentPane().add(upQuantite);
@@ -162,6 +224,21 @@ public class UICommandes {
 		 * @param inPwd Contient le prix de la comande
 		 */
 		upPrix = new JTextField();
+		upPrix.addKeyListener(new KeyAdapter() {
+			@Override
+			/**
+			 * Methode pour assurer que seulement les chiffres peuvent etre entrees
+			 */
+			public void keyPressed(KeyEvent e) {
+				char c = e.getKeyChar();		
+				if (Character.isDigit(c) || Character.isISOControl(c)) {
+					upPrix.setEditable(true);
+				} else {
+					upPrix.setEditable(false);
+				}
+	   	
+			}
+		});
 		upPrix.setColumns(10);
 		upPrix.setBounds(147, 472, 190, 20);
 		uicommandes.getContentPane().add(upPrix);
@@ -202,6 +279,21 @@ public class UICommandes {
 		 * @param upNomEmp Contient le nom de l'employe qui a formule la commande
 		 */	
 		upNomEmp = new JTextField();
+		upNomEmp.addKeyListener(new KeyAdapter() {
+			@Override
+			/**
+			 * Methode pour assurer que seulement les chiffres peuvent etre entrees
+			 */
+			public void keyPressed(KeyEvent e) {
+				char c = e.getKeyChar();		
+				if (Character.isLetter(c) || Character.isISOControl(c)) {
+					upNomEmp.setEditable(true);
+				} else {
+					upNomEmp.setEditable(false);
+				}
+	   	
+			}
+		});
 		upNomEmp.setColumns(10);
 		upNomEmp.setBounds(147, 379, 190, 20);
 		uicommandes.getContentPane().add(upNomEmp);

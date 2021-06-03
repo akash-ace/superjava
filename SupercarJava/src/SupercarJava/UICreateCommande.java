@@ -15,6 +15,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
 
 public class UICreateCommande {
@@ -87,6 +89,21 @@ public class UICreateCommande {
 		 * @param inDate Contient la date de la commande
 		 */
 		inDate = new JTextField();
+		inDate.addKeyListener(new KeyAdapter() {
+			@Override
+			/**
+			 * Methode pour assurer que seulement les chiffres peuvent etre entrees
+			 */
+			public void keyPressed(KeyEvent e) {
+				char c = e.getKeyChar();		
+				if (Character.isDigit(c) || Character.isISOControl(c)) {
+					inDate.setEditable(true);
+				} else {
+					inDate.setEditable(false);
+				}
+	   	
+			}
+		});
 		inDate.setBounds(201, 78, 258, 20);
 		uicommande.getContentPane().add(inDate);
 		inDate.setColumns(10);
@@ -101,6 +118,21 @@ public class UICreateCommande {
 		 * @param inPays Contient le pays d'origine du modele a commander 
 		 */
 		inPays = new JTextField();
+		inPays.addKeyListener(new KeyAdapter() {
+			@Override
+			/**
+			 * Methode pour assurer que seulement les chiffres peuvent etre entrees
+			 */
+			public void keyPressed(KeyEvent e) {
+				char c = e.getKeyChar();		
+				if (Character.isLetter(c) || Character.isISOControl(c)) {
+					inPays.setEditable(true);
+				} else {
+					inPays.setEditable(false);
+				}
+	   	
+			}
+		});
 		inPays.setColumns(10);
 		inPays.setBounds(201, 128, 258, 20);
 		uicommande.getContentPane().add(inPays);
@@ -115,6 +147,21 @@ public class UICreateCommande {
 		 * @param inQuantite Contient la quantite de la commande
 		 */
 		inQuantite = new JTextField();
+		inQuantite.addKeyListener(new KeyAdapter() {
+			@Override
+			/**
+			 * Methode pour assurer que seulement les chiffres peuvent etre entrees
+			 */
+			public void keyPressed(KeyEvent e) {
+				char c = e.getKeyChar();		
+				if (Character.isDigit(c) || Character.isISOControl(c)) {
+					inQuantite.setEditable(true);
+				} else {
+					inQuantite.setEditable(false);
+				}
+	   	
+			}
+		});
 		inQuantite.setColumns(10);
 		inQuantite.setBounds(201, 178, 258, 20);
 		uicommande.getContentPane().add(inQuantite);
@@ -122,6 +169,21 @@ public class UICreateCommande {
 		 * @param inPrix Contient le prix total de la commadne
 		 */
 		inPrix = new JTextField();
+		inPrix.addKeyListener(new KeyAdapter() {
+			@Override
+			/**
+			 * Methode pour assurer que seulement les chiffres peuvent etre entrees
+			 */
+			public void keyPressed(KeyEvent e) {
+				char c = e.getKeyChar();		
+				if (Character.isDigit(c) || Character.isISOControl(c)) {
+					inPrix.setEditable(true);
+				} else {
+					inPrix.setEditable(false);
+				}
+	   	
+			}
+		});
 		inPrix.setColumns(10);
 		inPrix.setBounds(201, 203, 258, 20);
 		uicommande.getContentPane().add(inPrix);
@@ -143,6 +205,20 @@ public class UICreateCommande {
 		 * Bouton afin d'annuler la commande
 		 */
 		JButton btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(new ActionListener() {
+			/**
+			 * Methode pour appeler la methode d'annulation
+			 */
+			public void actionPerformed(ActionEvent e) {
+				inDate.setText("");
+				inModele.setText("");
+				inEntrepot.setText("");
+				inNomEmp.setText("");
+				inQuantite.setText("");
+				inPays.setText("");
+				inPrix.setText("");
+			}
+		});
 		btnCancel.setBounds(339, 272, 89, 23);
 		uicommande.getContentPane().add(btnCancel);
 		
@@ -153,6 +229,21 @@ public class UICreateCommande {
 		 * @param inEntrepot Contient l'identifiant de l'entrepot
 		 */
 		inEntrepot = new JTextField();
+		inEntrepot.addKeyListener(new KeyAdapter() {
+			@Override
+			/**
+			 * Methode pour assurer que seulement les chiffres peuvent etre entrees
+			 */
+			public void keyPressed(KeyEvent e) {
+				char c = e.getKeyChar();		
+				if (Character.isDigit(c) || Character.isISOControl(c)) {
+					inEntrepot.setEditable(true);
+				} else {
+					inEntrepot.setEditable(false);
+				}
+	   	
+			}
+		});
 		inEntrepot.setColumns(10);
 		inEntrepot.setBounds(201, 53, 258, 20);
 		uicommande.getContentPane().add(inEntrepot);
